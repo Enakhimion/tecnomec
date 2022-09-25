@@ -5,25 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cliente extends Model
+class AltroCosto extends Model
 {
     use HasFactory;
 
-    protected $table = 'clienti';
+    protected $table = 'altri_costi';
 
     const CREATED_AT = 'data_creazione';
     const UPDATED_AT = 'data_modifica';
 
     protected $fillable = [
-        'nome',
-        'desinenza'
+        'id_articolo',
+        'descrizione',
+        'importo'
     ];
 
     /**
-     * Articoli del cliente
+     * Articolo del costo
      */
-    public function articoli()
+    public function articolo()
     {
-        return $this->hasMany(Articolo::class,'id_cliente');
+        return $this->belongsTo(Articolo::class,'id_articolo');
     }
 }

@@ -13,4 +13,18 @@ class Materiale extends Model
 
     const CREATED_AT = 'data_creazione';
     const UPDATED_AT = 'data_modifica';
+
+    protected $fillable = [
+        'nome',
+        'peso',
+        'prezzo_kg'
+    ];
+
+    /**
+     * Articoli del materiale
+     */
+    public function articoli()
+    {
+        return $this->hasMany(Articolo::class,'id_materiale');
+    }
 }

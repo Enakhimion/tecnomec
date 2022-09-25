@@ -5,25 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cliente extends Model
+class Macchinario extends Model
 {
     use HasFactory;
 
-    protected $table = 'clienti';
+    protected $table = 'macchinari';
 
     const CREATED_AT = 'data_creazione';
     const UPDATED_AT = 'data_modifica';
 
     protected $fillable = [
         'nome',
-        'desinenza'
+        'descrizione',
+        'costo_orario_macchina',
+        'costo_orario_setup'
     ];
 
     /**
-     * Articoli del cliente
+     * Lavorazioni interne
      */
-    public function articoli()
+    public function lav_interne()
     {
-        return $this->hasMany(Articolo::class,'id_cliente');
+        return $this->hasMany(LavInterna::class,'id_macchinario');
     }
+
 }
