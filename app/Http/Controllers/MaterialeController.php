@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Materiale;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MaterialeController extends Controller
 {
@@ -30,11 +32,29 @@ class MaterialeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        /*--- Inizio validazione input --*/
+
+        //Validazione dei campi presi in input
+        $validator = Validator::make(request()->all(),[
+            'nome' => ['required','max:250','unique:materiali,nome'],
+            'peso' => ['required','numeric'],
+            'prezzo_kg' => ['required','numeric'],
+        ]);
+
+        //Validazione degli input
+        $validator->validate();
+
+        Materiale::create([
+            'nome' => $request->nome,
+            'peso' => $request->peso,
+            'prezzo_kg' => $request->prezzo_kg
+        ]);
+
+        return back()->with('success','Materiale inserito correttamente');
     }
 
     /**

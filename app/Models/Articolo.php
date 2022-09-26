@@ -19,7 +19,7 @@ class Articolo extends Model
         'id_cliente',
         'codice',
         'descrizione',
-        'perc_aggiunta_pezzo',
+        'perc_aggiunta_prezzo',
         'peso_articolo',
         'lunghezza_tornito',
         'spessore_taglio',
@@ -52,7 +52,7 @@ class Articolo extends Model
      */
     public function getLunghezzaTronchettoAttribute()
     {
-        return $this->lunghezza_tornito + $this->spessore_taglio + $this->sovrametallo;
+        return round($this->lunghezza_tornito + $this->spessore_taglio + $this->sovrametallo,3);
     }
 
     /**
@@ -60,7 +60,7 @@ class Articolo extends Model
      */
     public function getNumPezziBarraAttribute()
     {
-        return ($this->lunghezza_barra - $this->lunghezza_spezzone) / $this->lunghezza_tronchetto;
+        return round(($this->lunghezza_barra - $this->lunghezza_spezzone) / $this->lunghezza_tronchetto,3);
     }
 
     /**
@@ -68,7 +68,7 @@ class Articolo extends Model
      */
     public function getLunghezzaScartoPezzoMozziconeAttribute()
     {
-        return $this->lunghezza_spezzone / $this->num_pezzi_barra;
+        return round($this->lunghezza_spezzone / $this->num_pezzi_barra,3);
     }
 
     /**
@@ -76,7 +76,7 @@ class Articolo extends Model
      */
     public function getLunghezzaTronchettoTotaleAttribute()
     {
-        return $this->lunghezza_tronchetto + $this->lunghezza_scarto_pezzo_mozzicone;
+        return round($this->lunghezza_tronchetto + $this->lunghezza_scarto_pezzo_mozzicone,3);
     }
 
     /**  Relazione N-1 */
