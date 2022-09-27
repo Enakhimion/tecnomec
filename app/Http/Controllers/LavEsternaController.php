@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Articolo;
 use App\Models\LavEsterna;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class LavEsternaController extends Controller
 {
@@ -31,11 +33,30 @@ class LavEsternaController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, Articolo $articolo)
     {
-        //
+        /*--- Inizio validazione input --*/
+
+        //Validazione dei campi presi in input
+        $validator = Validator::make(request()->all(),[
+            'id_tipologia' => ['required','numeric','exists:tipologie_lav_esterne,id'],
+            'descrizione' => ['required','max:80'],
+            'importo' => ['required','numeric'],
+        ]);
+
+        //Validazione degli input
+        $validator->validate();
+
+        LavEsterna::create([
+            'id_articolo' => $articolo->id,
+            'id_tipologia' => $request->id_tipologia,
+            'descrizione' => $request->descrizione,
+            'importo' => $request->importo
+        ]);
+
+        return back()->with('success','Lavorazione esterna insertia correttamente');
     }
 
     /**

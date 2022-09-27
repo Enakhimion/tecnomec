@@ -9,6 +9,11 @@ class LavInterna extends Model
 {
     use HasFactory;
 
+    protected $table = 'lav_interne';
+
+    const CREATED_AT = 'data_creazione';
+    const UPDATED_AT = 'data_modifica';
+
     protected $fillable = [
         'id_articolo',
         'id_macchinario',

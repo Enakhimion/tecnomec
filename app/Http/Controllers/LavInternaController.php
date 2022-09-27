@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Articolo;
 use App\Models\LavInterna;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class LavInternaController extends Controller
 {
@@ -31,11 +33,36 @@ class LavInternaController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, Articolo $articolo)
     {
-        //
+        /*--- Inizio validazione input --*/
+
+        //Validazione dei campi presi in input
+        $validator = Validator::make(request()->all(),[
+            'id_macchinario' => ['required','numeric','exists:macchinari,id'],
+            'descrizione' => ['required','max:80'],
+            'costo_utensileria' => ['required','numeric'],
+            'minuti_setup' => ['required','numeric'],
+            'perc_resa' => ['nullable','numeric'],
+            'tempo_pezzo' => ['required','numeric'],
+        ]);
+
+        //Validazione degli input
+        $validator->validate();
+
+        LavInterna::create([
+            'id_articolo' => $articolo->id,
+            'id_macchinario' => $request->id_macchinario,
+            'descrizione' => $request->descrizione,
+            'costo_utensileria' => $request->costo_utensileria,
+            'minuti_setup' => $request->minuti_setup,
+            'perc_resa' => $request->perc_resa ?? 85,
+            'tempo_pezzo' => $request->tempo_pezzo,
+        ]);
+
+        return back()->with('success','Lavorazione interna insertia correttamente');
     }
 
     /**

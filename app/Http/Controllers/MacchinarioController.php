@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Macchinario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MacchinarioController extends Controller
 {
@@ -31,11 +32,31 @@ class MacchinarioController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        /*--- Inizio validazione input --*/
+
+        //Validazione dei campi presi in input
+        $validator = Validator::make(request()->all(),[
+            'nome' => ['required','max:80'],
+            'descrizione' => ['required','max:80'],
+            'costo_orario_macchina' => ['required','numeric'],
+            'costo_orario_setup' => ['required','numeric'],
+        ]);
+
+        //Validazione degli input
+        $validator->validate();
+
+        Macchinario::create([
+            'nome' => $request->nome,
+            'descrizione' => $request->descrizione,
+            'costo_orario_macchina' => $request->costo_orario_macchina,
+            'costo_orario_setup' => $request->costo_orario_setup
+        ]);
+
+        return back()->with('success','Macchinario insertio correttamente');
     }
 
     /**

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Articolo;
 use App\Models\Cliente;
+use App\Models\Macchinario;
 use App\Models\Materiale;
+use App\Models\TipologiaLavEsterna;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -112,6 +114,8 @@ class ArticoloController extends Controller
             'articolo' => $articolo,
             'materiali' => Materiale::pluck('nome','id'),
             'clienti' => Cliente::pluck('nome','id'),
+            'tipologie' => TipologiaLavEsterna::pluck('descrizione','id'),
+            'macchinari' => Macchinario::pluck('nome','id'),
         ];
 
         return view('articoli.edit', $data);

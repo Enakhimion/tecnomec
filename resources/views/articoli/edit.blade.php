@@ -26,6 +26,23 @@
 
             </div>
         </div>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                Costi
+            </div>
+            <div class="card-body">
+                <div class="form-group row mb-3 mt-3">
+
+                    @include('lav_esterne.create')
+
+                    @include('lav_interne.create')
+
+                    @include('altri_costi.create')
+
+                </div>
+            </div>
+        </div>
     </div>
 
 </x-app-layout>

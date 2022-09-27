@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\AltroCosto;
+use App\Models\Articolo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AltroCostoController extends Controller
 {
@@ -31,11 +33,28 @@ class AltroCostoController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, Articolo $articolo)
     {
-        //
+        /*--- Inizio validazione input --*/
+
+        //Validazione dei campi presi in input
+        $validator = Validator::make(request()->all(),[
+            'descrizione' => ['required','max:80'],
+            'importo' => ['required','numeric'],
+        ]);
+
+        //Validazione degli input
+        $validator->validate();
+
+        AltroCosto::create([
+            'id_articolo' => $articolo->id,
+            'descrizione' => $request->descrizione,
+            'importo' => $request->importo
+        ]);
+
+        return back()->with('success','Altro costo insertito correttamente');
     }
 
     /**
