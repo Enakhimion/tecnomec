@@ -49,4 +49,8 @@ Route::resource('articoli.lav_interne', \App\Http\Controllers\LavInternaControll
 Route::resource('articoli.altri_costi', \App\Http\Controllers\AltroCostoController::class, ['names' => 'altri_costi'])
     ->parameters(['articoli' => 'articolo','altri_costi' => 'altro_costo']);
 
+//Route per la gestione dei preventivi
+Route::resource('articoli.preventivi', \App\Http\Controllers\PreventivoController::class, ['names' => 'preventivi'])
+    ->parameters(['articoli' => 'articolo','preventivi' => 'preventivo']);
+
 require __DIR__.'/auth.php';

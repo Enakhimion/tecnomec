@@ -6,12 +6,15 @@ use App\Models\Articolo;
 use App\Models\Cliente;
 use App\Models\Macchinario;
 use App\Models\Materiale;
+use App\Models\Preventivo;
 use App\Models\TipologiaLavEsterna;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ArticoloController extends Controller
 {
@@ -88,6 +91,13 @@ class ArticoloController extends Controller
             'is_contolavoro' => $request->is_contolavoro ? 1 : 0
         ]);
 
+        //Creo anche il preventivo
+        Preventivo::create([
+            'id_articolo' => $articolo->id,
+            'data' => Carbon::now(),
+            'qta1' => 0,
+        ]);
+
         return redirect()->route('articoli.edit', $articolo)->with('success', 'Articolo inserito correttamente');
     }
 
@@ -107,15 +117,136 @@ class ArticoloController extends Controller
      *
      * @param  \App\Models\Articolo  $articolo
      * @return Application|Factory|View
+     * TODO migliorare la funzione
      */
     public function edit(Articolo $articolo)
     {
+        //Calcolo i costi dell'articolo
+        $preventivo = $articolo->preventivi[0];
+        $materiale = $articolo->materiale;
+
+        //Calcolo il costo del materiale univoco per tutte le quantita
+        $pesomm = $materiale->peso / 1000;
+        $peso_tronchetto = $pesomm * $articolo->lunghezza_tronchetto_totale;
+        $recupero = ($articolo->lunghezza_tronchetto_totale - $articolo->lunghezza_tronchetto * $peso_tronchetto) * $articolo->recupero / 1000;
+        $costo_mat_mm = $pesomm * $materiale->prezzo_kg;
+        $costo_materiale = $articolo->is_contolavoro ? 0 : $costo_mat_mm * $articolo->lunghezza_tronchetto_totale - $recupero;
+
+        $costi = [];
+
+        for ($i = 0; $i < 4; $i++){
+
+            //In base al numero del ciclo prendo la qta
+            switch ($i) {
+                case 0:
+                    $qta = $preventivo->qta1;
+                    break;
+                case 1:
+                    $qta = $preventivo->qta2;
+                    break;
+                case 2:
+                    $qta = $preventivo->qta3;
+                    break;
+                case 3:
+                    $qta = $preventivo->qta4;
+                    break;
+            }
+
+            if($qta !== null && $qta !== 0){
+
+                //Calcolo le lavorazioni interne
+                foreach ($articolo->lav_interne as $lavorazione_interna){
+
+                    $macchinario = $lavorazione_interna->macchinario;
+                    $costo_lavorazione = $lavorazione_interna->tempo_effettivo * ($macchinario->costo_orario_macchina / 3600);
+                    $costo_setup = $lavorazione_interna->minuti_setup / 60 * $macchinario->costo_orario_setup;
+                    $costo_setup_qta = $costo_setup / $qta;
+                    $costo_utensileria_qta = $lavorazione_interna->costo_utensileria / $qta;
+                    //TODO costo struttura farlo parametrico
+                    $costo_struttura_qta = (1400 / 175 / 7) * ($lavorazione_interna->tempo_effettivo * $qta / 3600) / $qta;
+
+                    if(isset($costo[$i]['lav_interne'])){
+                        $costo[$i]['lav_interne'] += $costo_lavorazione + $costo_setup_qta + $costo_utensileria_qta;
+                    }else{
+                        $costo[$i]['lav_interne'] = $costo_lavorazione + $costo_setup_qta + $costo_utensileria_qta;
+                    }
+                }
+
+                //Controllo se non ha lavorazioni interene
+                if(count($articolo->lav_interne) === 0){
+                    $costo[$i]['lav_interne'] = 0;
+                }
+
+                //Calcolo le lavorazioni esterne
+                foreach ($articolo->lav_esterne as $lavorazioni_esterne){
+
+                    $costo_lavorazione_esterna = 0;
+
+                    //In base alla tipologia cambia il calcolo
+                    switch ($lavorazioni_esterne->id_tipologia) {
+                        //Al lotto
+                        case 1:
+                            $costo_lavorazione_esterna = $lavorazioni_esterne->importo / $qta;
+                            break;
+                        //Al KG
+                        case 2:
+                            $costo_lavorazione_esterna = $lavorazioni_esterne->importo / 1000 * $articolo->peso_articolo;
+                            break;
+                        //Singolo pezzo
+                        case 3:
+                            $costo_lavorazione_esterna = $lavorazioni_esterne->importo;
+                            break;
+                    }
+
+                    if(isset($costo[$i]['lav_esterne'])){
+                        $costo[$i]['lav_esterne'] += $costo_lavorazione_esterna;
+                    }else{
+                        $costo[$i]['lav_esterne'] = $costo_lavorazione_esterna;
+                    }
+                }
+
+                //Controllo se non ha lavorazioni esterne
+                if(count($articolo->lav_esterne) === 0){
+                    $costo[$i]['lav_esterne'] = 0;
+                }
+
+                //Calcolo altri costi
+                foreach ($articolo->altri_costi as $altro_costo){
+
+                    if(isset($costo[$i]['altri_costi'])){
+                        $costo[$i]['altri_costi'] += $altro_costo->importo / $qta;
+                    }else{
+                        $costo[$i]['altri_costi'] = $altro_costo->importo / $qta;
+                    }
+                }
+
+                //Controllo se non ha altri_costi
+                if(count($articolo->altri_costi) === 0){
+                    $costo[$i]['altri_costi'] = 0;
+                }
+
+                //Totalone
+                $costo[$i]['costo'] = $costo[$i]['altri_costi'] + $costo[$i]['lav_esterne'] + $costo[$i]['lav_interne'] + $costo_materiale;
+
+            }else{
+
+                $costo[$i]['costo'] = 0;
+                $costo[$i]['altri_costi'] = 0;
+                $costo[$i]['lav_esterne'] = 0;
+                $costo[$i]['lav_interne'] = 0;
+            }
+
+        }
+
+
         $data = [
             'articolo' => $articolo,
             'materiali' => Materiale::pluck('nome','id'),
             'clienti' => Cliente::pluck('nome','id'),
             'tipologie' => TipologiaLavEsterna::pluck('descrizione','id'),
             'macchinari' => Macchinario::pluck('nome','id'),
+            'costo' => $costo,
+            'costo_materiale' => $costo_materiale
         ];
 
         return view('articoli.edit', $data);
@@ -146,7 +277,7 @@ class ArticoloController extends Controller
             'lunghezza_barra' => ['nullable','numeric'],
             'lunghezza_spezzone' => ['nullable','numeric'],
             'recupero' => ['nullable','numeric'],
-            'is_contolavoro'  => ['nullable'],
+            'is_contolavoro'  => [Rule::in(0,1)],
         ]);
 
         //Validazione degli input
@@ -165,7 +296,7 @@ class ArticoloController extends Controller
             'lunghezza_barra' => $request->lunghezza_barra ?? 3000,
             'lunghezza_spezzone' => $request->lunghezza_spezzone ??150,
             'recupero' => $request->recupero ?? 0.1,
-            'is_contolavoro' => $request->is_contolavoro ? 1 : 0
+            'is_contolavoro' => $request->is_contolavoro
         ]);
 
         return back()->with('success', 'Articolo inserito correttamente');

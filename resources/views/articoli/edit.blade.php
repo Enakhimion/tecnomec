@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Nuovo articolo
+            Articolo {{ $articolo->codice_completo }}
         </h2>
     </x-slot>
 
@@ -23,6 +23,17 @@
                 @include('clienti.create')
 
                 @include('materiali.create')
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                Preventivo
+            </div>
+            <div class="card-body">
+
+                @include('preventivi.edit')
 
             </div>
         </div>

@@ -105,11 +105,11 @@
 
         @error('recupero')<div class="invalid-feedback">{{ $message }}</div>@enderror
     </div>
-    {{-- Lunghezza articolo tornito --}}
+    {{-- Is conto lavoro --}}
     <div class="col-sm">
         @php
             echo Form::label('is_contolavoro', 'Contolavoro', ['class' => 'col-sm col-form-label col-form-label-sm']);
-            echo Form::checkbox('is_contolavoro',null,['class' => 'form-control form-control-sm '. ($errors->has('is_contolavoro') ? ' is-invalid' : null)]);
+            echo Form::select('is_contolavoro',[0 => 'No', 1 => 'Si'],null,['class' => 'form-control form-control-sm '. ($errors->has('is_contolavoro') ? ' is-invalid' : null)]);
         @endphp
 
         @error('is_contolavoro')<div class="invalid-feedback">{{ $message }}</div>@enderror
