@@ -18,7 +18,12 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+
+    $data = [
+        'articoli' => \App\Models\Articolo::all()
+    ];
+
+    return view('dashboard', $data);
 })->middleware(['auth'])->name('dashboard');
 
 //Route per la gestione degli articoli
