@@ -51,6 +51,77 @@
 
                     @include('altri_costi.create')
 
+                    <table class="table mt-5">
+                        <thead>
+                        <tr>
+                            <th scope="col">Descrizione</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">QTA 1</th>
+                            <th scope="col">QTA 2</th>
+                            <th scope="col">QTA 3</th>
+                            <th scope="col">QTA 4</th>
+                            <th scope="col">Elimina</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($elenco_interne as $interna)
+
+                            <tr>
+                                <td>{{ $interna['descrizione'] }}</td>
+                                <td>{{ $interna['tipo'] }}</td>
+                                <td>{{ $interna['qta1'] }}</td>
+                                <td>{{ $interna['qta2'] }}</td>
+                                <td>{{ $interna['qta3'] }}</td>
+                                <td>{{ $interna['qta4'] }}</td>
+                                <form id="destroy-form" action="{{ $interna['delete'] }}" method="POST" style="display: none;">
+                                    @method('DELETE')
+                                    <td>{!! Form::submit('Elimina', ['class' => 'btn btn-danger']) !!}</td>
+                                    @csrf
+                                </form>
+                            </tr>
+
+                        @endforeach
+
+                        @foreach($elenco_esterne as $esterna)
+
+                            <tr>
+                                <td>{{ $esterna['descrizione'] }}</td>
+                                <td>{{ $esterna['tipo'] }}</td>
+                                <td>{{ $esterna['qta1'] }}</td>
+                                <td>{{ $esterna['qta2'] }}</td>
+                                <td>{{ $esterna['qta3'] }}</td>
+                                <td>{{ $esterna['qta4'] }}</td>
+                                <form id="destroy-form" action="{{ $esterna['delete'] }}" method="POST" style="display: none;">
+                                    @method('DELETE')
+                                    <td>{!! Form::submit('Elimina', ['class' => 'btn btn-danger']) !!}</td>
+                                    @csrf
+                                </form>
+                            </tr>
+
+                        @endforeach
+
+                        @foreach($elenco_altri_costi as $altri_costi)
+
+                            <tr>
+                                <td>{{ $altri_costi['descrizione'] }}</td>
+                                <td>{{ $altri_costi['tipo'] }}</td>
+                                <td>{{ $altri_costi['qta1'] }}</td>
+                                <td>{{ $altri_costi['qta2'] }}</td>
+                                <td>{{ $altri_costi['qta3'] }}</td>
+                                <td>{{ $altri_costi['qta4'] }}</td>
+                                <form id="destroy-form" action="{{ $altri_costi['delete'] }}" method="POST" style="display: none;">
+                                    @method('DELETE')
+                                    <td>{!! Form::submit('Elimina', ['class' => 'btn btn-danger']) !!}</td>
+                                    @csrf
+                                </form>
+
+                            </tr>
+
+                        @endforeach
+
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </div>

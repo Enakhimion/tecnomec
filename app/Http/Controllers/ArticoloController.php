@@ -61,7 +61,7 @@ class ArticoloController extends Controller
             'id_cliente' => ['required','numeric','exists:clienti,id'],
             'codice' => ['required','numeric'],
             'descrizione' => ['required','max:80'],
-            //'perc_aggiunta_prezzo' => ['required', 'numeric','max:100'],
+            'perc_aggiunta_prezzo' => ['required', 'numeric','max:100'],
             'peso_articolo' => ['required','numeric'],
             'lunghezza_tornito' => ['required','numeric'],
             'spessore_taglio' => ['nullable','numeric'],
@@ -121,6 +121,43 @@ class ArticoloController extends Controller
      */
     public function edit(Articolo $articolo)
     {
+
+        //Recupero tutti i costi in un unico array
+        $elenco_interne = [];
+
+        foreach ($articolo->lav_interne as $lavorazione_interna){
+
+            $elenco_interne[$lavorazione_interna->id] = [
+                'descrizione' => $lavorazione_interna->descrizione,
+                'tipo' => 'Lavorazione interna',
+                'delete' => route('lav_interne.destroy',[$articolo,$lavorazione_interna])
+            ];
+        }
+
+        //Recupero tutti i costi in un unico array
+        $elenco_esterne = [];
+
+        foreach ($articolo->lav_esterne as $lavorazione_esterna){
+
+            $elenco_esterne[$lavorazione_esterna->id] = [
+                'descrizione' => $lavorazione_esterna->descrizione,
+                'tipo' => 'Lavorazione esterna',
+                'delete' => route('lav_esterne.destroy',[$articolo,$lavorazione_esterna])
+            ];
+        }
+
+        //Recupero tutti i costi in un unico array
+        $elenco_altri_costi = [];
+
+        foreach ($articolo->altri_costi as $altro_costo){
+
+            $elenco_altri_costi[$altro_costo->id] = [
+                'descrizione' => $altro_costo->descrizione,
+                'tipo' => 'Altro costo',
+                'delete' => route('altri_costi.destroy',[$articolo,$altro_costo])
+            ];
+        }
+
         //Calcolo i costi dell'articolo
         $preventivo = $articolo->preventivi[0];
         $materiale = $articolo->materiale;
@@ -170,6 +207,26 @@ class ArticoloController extends Controller
                     }else{
                         $costo[$i]['lav_interne'] = $costo_lavorazione + $costo_setup_qta + $costo_utensileria_qta;
                     }
+
+                    //In base al numero decido che key dargli
+                    switch ($i) {
+                        case 0:
+                            $elenco_interne[$lavorazione_interna->id]['qta1'] = $costo_lavorazione + $costo_setup_qta + $costo_utensileria_qta;
+                            $elenco_interne[$lavorazione_interna->id]['qta2'] = 0;
+                            $elenco_interne[$lavorazione_interna->id]['qta3'] = 0;
+                            $elenco_interne[$lavorazione_interna->id]['qta4'] = 0;
+                            break;
+                        case 1:
+                            $elenco_interne[$lavorazione_interna->id]['qta2'] = $costo_lavorazione + $costo_setup_qta + $costo_utensileria_qta;
+                            break;
+                        case 2:
+                            $elenco_interne[$lavorazione_interna->id]['qta3'] = $costo_lavorazione + $costo_setup_qta + $costo_utensileria_qta;
+                            break;
+                        case 3:
+                            $elenco_interne[$lavorazione_interna->id]['qta4'] = $costo_lavorazione + $costo_setup_qta + $costo_utensileria_qta;
+                            break;
+                    }
+
                 }
 
                 //Controllo se non ha lavorazioni interene
@@ -203,6 +260,25 @@ class ArticoloController extends Controller
                     }else{
                         $costo[$i]['lav_esterne'] = $costo_lavorazione_esterna;
                     }
+
+                    //In base al numero decido che key dargli
+                    switch ($i) {
+                        case 0:
+                            $elenco_esterne[$lavorazioni_esterne->id]['qta1'] = $costo_lavorazione_esterna;
+                            $elenco_esterne[$lavorazioni_esterne->id]['qta2'] = 0;
+                            $elenco_esterne[$lavorazioni_esterne->id]['qta3'] = 0;
+                            $elenco_esterne[$lavorazioni_esterne->id]['qta4'] = 0;
+                            break;
+                        case 1:
+                            $elenco_esterne[$lavorazioni_esterne->id]['qta2'] = $costo_lavorazione_esterna;
+                            break;
+                        case 2:
+                            $elenco_esterne[$lavorazioni_esterne->id]['qta3'] = $costo_lavorazione_esterna;
+                            break;
+                        case 3:
+                            $elenco_esterne[$lavorazioni_esterne->id]['qta4'] = $costo_lavorazione_esterna;
+                            break;
+                    }
                 }
 
                 //Controllo se non ha lavorazioni esterne
@@ -218,6 +294,25 @@ class ArticoloController extends Controller
                     }else{
                         $costo[$i]['altri_costi'] = $altro_costo->importo / $qta;
                     }
+
+                    //In base al numero decido che key dargli
+                    switch ($i) {
+                        case 0:
+                            $elenco_altri_costi[$altro_costo->id]['qta1'] = $altro_costo->importo / $qta;
+                            $elenco_altri_costi[$altro_costo->id]['qta2'] = 0;
+                            $elenco_altri_costi[$altro_costo->id]['qta3'] = 0;
+                            $elenco_altri_costi[$altro_costo->id]['qta4'] = 0;
+                            break;
+                        case 1:
+                            $elenco_altri_costi[$altro_costo->id]['qta2'] = $altro_costo->importo / $qta;
+                            break;
+                        case 2:
+                            $elenco_altri_costi[$altro_costo->id]['qta3'] = $altro_costo->importo / $qta;
+                            break;
+                        case 3:
+                            $elenco_altri_costi[$altro_costo->id]['qta4'] = $altro_costo->importo / $qta;
+                            break;
+                    }
                 }
 
                 //Controllo se non ha altri_costi
@@ -227,6 +322,9 @@ class ArticoloController extends Controller
 
                 //Totalone
                 $costo[$i]['costo'] = $costo[$i]['altri_costi'] + $costo[$i]['lav_esterne'] + $costo[$i]['lav_interne'] + $costo_materiale;
+
+                //Calcolo il ricarico
+                $costo[$i]['costo'] =  $costo[$i]['costo'] / 100 * $articolo->perc_aggiunta_prezzo + $costo[$i]['costo'];
 
             }else{
 
@@ -239,6 +337,8 @@ class ArticoloController extends Controller
         }
 
 
+
+
         $data = [
             'articolo' => $articolo,
             'materiali' => Materiale::pluck('nome','id'),
@@ -246,7 +346,10 @@ class ArticoloController extends Controller
             'tipologie' => TipologiaLavEsterna::pluck('descrizione','id'),
             'macchinari' => Macchinario::pluck('nome','id'),
             'costo' => $costo,
-            'costo_materiale' => $costo_materiale
+            'costo_materiale' => $costo_materiale,
+            'elenco_interne'=> $elenco_interne,
+            'elenco_esterne' => $elenco_esterne,
+            'elenco_altri_costi' => $elenco_altri_costi
         ];
 
         return view('articoli.edit', $data);
@@ -269,7 +372,7 @@ class ArticoloController extends Controller
             'id_cliente' => ['required','numeric','exists:clienti,id'],
             'codice' => ['required','numeric'],
             'descrizione' => ['required','max:80'],
-            //'perc_aggiunta_prezzo' => ['required', 'numeric','max:100'],
+            'perc_aggiunta_prezzo' => ['required', 'numeric','max:100'],
             'peso_articolo' => ['required','numeric'],
             'lunghezza_tornito' => ['required','numeric'],
             'spessore_taglio' => ['nullable','numeric'],

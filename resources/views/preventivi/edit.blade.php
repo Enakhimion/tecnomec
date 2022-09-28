@@ -8,7 +8,7 @@
         <th scope="col">Lavorazioni Interne</th>
         <th scope="col">Lavorazioni Esterne</th>
         <th scope="col">Altri costi</th>
-        <th scope="col">Costo pezzo</th>
+        <th scope="col">Costo pezzo (con {{ $articolo->perc_aggiunta_prezzo }}% di ricarico)</th>
         <th scope="col">Prezzo vendita</th>
     </tr>
     </thead>

@@ -95,10 +95,12 @@ class AltroCostoController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\AltroCosto  $altroCosto
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(AltroCosto $altroCosto)
+    public function destroy(Articolo $articolo, AltroCosto $altroCosto)
     {
-        //
+        $altroCosto->delete();
+
+        return back()->with('success','Costo eliminato correttamente');
     }
 }
