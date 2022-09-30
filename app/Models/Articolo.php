@@ -60,7 +60,7 @@ class Articolo extends Model
      */
     public function getNumPezziBarraAttribute()
     {
-        return round(($this->lunghezza_barra - $this->lunghezza_spezzone) / $this->lunghezza_tronchetto,3);
+        return floor(($this->lunghezza_barra - $this->lunghezza_spezzone) / $this->lunghezza_tronchetto);
     }
 
     /**
