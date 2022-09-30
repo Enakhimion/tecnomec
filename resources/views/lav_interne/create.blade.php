@@ -50,7 +50,7 @@
                     {{-- Percentuale resa --}}
                     <div class="col-sm">
                         @php
-                            echo Form::label('perc_resa', 'Percentuale resa', ['class' => 'col-sm col-form-label col-form-label-sm']);
+                            echo Form::label('perc_resa', 'Percentuale resa', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
                             echo Form::number('perc_resa', null,['placeholder' => '85','autocomplete' => 'off','class' => 'form-control form-control-sm']);
                         @endphp
                     </div>

@@ -69,10 +69,10 @@
                             <tr>
                                 <td>{{ $interna['descrizione'] }}</td>
                                 <td>{{ $interna['tipo'] }}</td>
-                                <td>{{ $interna['qta1'] }}</td>
-                                <td>{{ $interna['qta2'] }}</td>
-                                <td>{{ $interna['qta3'] }}</td>
-                                <td>{{ $interna['qta4'] }}</td>
+                                <td>{{ round($interna['qta1'], 4) }}</td>
+                                <td>{{ round($interna['qta2'], 4) }}</td>
+                                <td>{{ round($interna['qta3'], 4) }}</td>
+                                <td>{{ round($interna['qta4'], 4) }}</td>
                                 <form id="destroy-form" action="{{ $interna['delete'] }}" method="POST" style="display: none;">
                                     @method('DELETE')
                                     <td>{!! Form::submit('Elimina', ['class' => 'btn btn-danger']) !!}</td>
@@ -87,10 +87,10 @@
                             <tr>
                                 <td>{{ $esterna['descrizione'] }}</td>
                                 <td>{{ $esterna['tipo'] }}</td>
-                                <td>{{ $esterna['qta1'] }}</td>
-                                <td>{{ $esterna['qta2'] }}</td>
-                                <td>{{ $esterna['qta3'] }}</td>
-                                <td>{{ $esterna['qta4'] }}</td>
+                                <td>{{ round($esterna['qta1'], 4) }}</td>
+                                <td>{{ round($esterna['qta2'], 4) }}</td>
+                                <td>{{ round($esterna['qta3'], 4) }}</td>
+                                <td>{{ round($esterna['qta4'], 4) }}</td>
                                 <form id="destroy-form" action="{{ $esterna['delete'] }}" method="POST" style="display: none;">
                                     @method('DELETE')
                                     <td>{!! Form::submit('Elimina', ['class' => 'btn btn-danger']) !!}</td>
@@ -105,10 +105,10 @@
                             <tr>
                                 <td>{{ $altri_costi['descrizione'] }}</td>
                                 <td>{{ $altri_costi['tipo'] }}</td>
-                                <td>{{ $altri_costi['qta1'] }}</td>
-                                <td>{{ $altri_costi['qta2'] }}</td>
-                                <td>{{ $altri_costi['qta3'] }}</td>
-                                <td>{{ $altri_costi['qta4'] }}</td>
+                                <td>{{ round($altri_costi['qta1'], 4) }}</td>
+                                <td>{{ round($altri_costi['qta2'], 4) }}</td>
+                                <td>{{ round($altri_costi['qta3'], 4) }}</td>
+                                <td>{{ round($altri_costi['qta4'], 4) }}</td>
                                 <form id="destroy-form" action="{{ $altri_costi['delete'] }}" method="POST" style="display: none;">
                                     @method('DELETE')
                                     <td>{!! Form::submit('Elimina', ['class' => 'btn btn-danger']) !!}</td>
