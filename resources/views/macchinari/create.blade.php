@@ -1,7 +1,7 @@
 
 
 <!-- Button trigger modal -->
-<a type="button"  data-bs-toggle="modal" data-bs-target="#modalMacchinario">
+<a type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalMacchinario">
     Nuovo macchinario
 </a>
 

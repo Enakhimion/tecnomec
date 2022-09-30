@@ -1,9 +1,9 @@
 
 <div class="col-3">
     <!-- Button trigger modal -->
-    <a type="button"  data-bs-toggle="modal" data-bs-target="#modalAltriCosti">
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAltriCosti">
         Altri costi
-    </a>
+    </button>
 </div>
 
 <!-- Modal -->

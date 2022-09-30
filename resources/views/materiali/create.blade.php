@@ -4,9 +4,9 @@
 
     <div class="col-3">
         <!-- Button trigger modal -->
-        <a type="button"  data-bs-toggle="modal" data-bs-target="#modalMateriali">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalMateriali">
             Aggiungi un nuovo materiale
-        </a>
+        </button>
     </div>
 
     <!-- Modal -->

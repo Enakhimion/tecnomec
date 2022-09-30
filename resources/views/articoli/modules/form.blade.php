@@ -63,7 +63,7 @@
     {{-- Spessore Taglio --}}
     <div class="col-sm">
         @php
-            echo Form::label('spessore_taglio', 'Spessore taglio', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::label('spessore_taglio', 'Spessore taglio', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
             echo Form::number('spessore_taglio', null,['step' => '0.001','placeholder' => '3','autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('spessore_taglio') ? ' is-invalid' : null)]);
         @endphp
 
@@ -72,7 +72,7 @@
     {{-- Sovrametallo --}}
     <div class="col-sm">
         @php
-            echo Form::label('sovrametallo', 'Sovrametallo', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::label('sovrametallo', 'Sovrametallo', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
             echo Form::number('sovrametallo', null,['step' => '0.001','placeholder' => '0,5','autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('sovrametallo') ? ' is-invalid' : null)]);
         @endphp
 
@@ -81,7 +81,7 @@
     {{-- Lunghezza Barra --}}
     <div class="col-sm">
         @php
-            echo Form::label('lunghezza_barra', 'Lunghezza barra', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::label('lunghezza_barra', 'Lunghezza barra', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
             echo Form::number('lunghezza_barra',null,['placeholder' => '3000','class' => 'form-control form-control-sm '. ($errors->has('lunghezza_barra') ? ' is-invalid' : null)]);
         @endphp
 
@@ -90,7 +90,7 @@
     {{-- Lunghezza spezzone --}}
     <div class="col-sm">
         @php
-            echo Form::label('lunghezza_spezzone', 'Lunghezza spezzone', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::label('lunghezza_spezzone', 'Lunghezza spezzone', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
             echo Form::number('lunghezza_spezzone',null,['step' => '0.001','placeholder' => '150','class' => 'form-control form-control-sm '. ($errors->has('lunghezza_spezzone') ? ' is-invalid' : null)]);
         @endphp
 
@@ -99,7 +99,7 @@
     {{-- Recupero --}}
     <div class="col-sm">
         @php
-            echo Form::label('recupero', 'Recupero', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::label('recupero', 'Recupero', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
             echo Form::text('recupero',null,['step' => '0.001','placeholder' => '0,1','class' => 'form-control form-control-sm '. ($errors->has('recupero') ? ' is-invalid' : null)]);
         @endphp
 
@@ -108,7 +108,7 @@
     {{-- Is conto lavoro --}}
     <div class="col-sm">
         @php
-            echo Form::label('is_contolavoro', 'Contolavoro', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::label('is_contolavoro', 'Contolavoro', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
             echo Form::select('is_contolavoro',[0 => 'No', 1 => 'Si'],null,['class' => 'form-control form-control-sm '. ($errors->has('is_contolavoro') ? ' is-invalid' : null)]);
         @endphp
 
@@ -160,8 +160,8 @@
     {{-- Percentuale Ricarico--}}
     <div class="col-sm">
         @php
-            echo Form::label('perc_aggiunta_prezzo', '% Ricarico', ['class' => 'col-sm col-form-label col-form-label-sm']);
-            echo Form::number('perc_aggiunta_prezzo',null,['placeholder' => '150','class' => 'form-control form-control-sm '. ($errors->has('perc_aggiunta_prezzo') ? ' is-invalid' : null)]);
+            echo Form::label('perc_aggiunta_prezzo', '% Ricarico', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
+            echo Form::number('perc_aggiunta_prezzo',null,['placeholder' => '5','class' => 'form-control form-control-sm '. ($errors->has('perc_aggiunta_prezzo') ? ' is-invalid' : null)]);
         @endphp
 
         @error('perc_aggiunta_prezzo')<div class="invalid-feedback">{{ $message  }}</div>@enderror

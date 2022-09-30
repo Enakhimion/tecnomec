@@ -4,7 +4,7 @@
 
     <div class="col-3">
         <!-- Button trigger modal -->
-        <a type="button"  data-bs-toggle="modal" data-bs-target="#modalClienti">
+        <a class="btn btn-success" type="button"  data-bs-toggle="modal" data-bs-target="#modalClienti">
             Aggiungi un nuovo cliente
         </a>
     </div>
