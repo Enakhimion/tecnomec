@@ -105,8 +105,10 @@ class LavInternaController extends Controller
      * @param  \App\Models\LavInterna  $lavInterna
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LavInterna $lavInterna)
+    public function destroy(Articolo $articolo, LavInterna $lav_interna)
     {
-        //
+        $lav_interna->delete();
+        
+        return back()->with('success', "Lavorazione interna eliminata correttamente");
     }
 }
