@@ -11,10 +11,4 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    server: {
-        host: '138.68.68.208/',
-        watch: {
-            usePolling: true,
-        },
-    },
 });
