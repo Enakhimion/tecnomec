@@ -35,7 +35,7 @@ class LavInterna extends Model
      */
     public function getTempoEffettivoAttribute()
     {
-        return round($this->tempo_pezzo / 100 * $this->perc_resa + $this->tempo_pezzo,2);
+        return round($this->tempo_pezzo / 100 * (100 - $this->perc_resa) + $this->tempo_pezzo,2);
     }
 
     /**
