@@ -32,7 +32,7 @@
     <div class="col-sm">
         @php
             echo Form::label('codice', 'Codice', ['class' => 'col-sm col-form-label col-form-label-sm']);
-            echo Form::number('codice',null,['autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('codice') ? ' is-invalid' : null)]);
+            echo Form::text('codice',null,['autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('codice') ? ' is-invalid' : null)]);
         @endphp
 
         @error('codice')<div class="invalid-feedback">{{ $message  }}</div>@enderror
