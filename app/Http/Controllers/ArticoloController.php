@@ -391,7 +391,7 @@ class ArticoloController extends Controller
             'id_cliente' => $request->id_cliente,
             'codice' => $request->codice,
             'descrizione' => $request->descrizione,
-            'perc_aggiunta_prezzo' => $request->perc_aggiunta_pezzo ?? 5,
+            'perc_aggiunta_prezzo' => $request->perc_aggiunta_prezzo ?? 5,
             'peso_articolo' => $request->peso_articolo,
             'lunghezza_tornito' => $request->lunghezza_tornito,
             'spessore_taglio' => $request->spessore_taglio ?? 3,
