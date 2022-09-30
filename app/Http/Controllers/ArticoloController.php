@@ -59,7 +59,7 @@ class ArticoloController extends Controller
         $validator = Validator::make(request()->all(),[
             'id_materiale' => ['required','numeric','exists:materiali,id'],
             'id_cliente' => ['required','numeric','exists:clienti,id'],
-            'codice' => ['required','numeric'],
+            'codice' => ['required','max:80'],
             'descrizione' => ['required','max:80'],
             'perc_aggiunta_prezzo' => ['required', 'numeric','max:100'],
             'peso_articolo' => ['required','numeric'],
@@ -370,7 +370,7 @@ class ArticoloController extends Controller
         $validator = Validator::make(request()->all(),[
             'id_materiale' => ['required','numeric','exists:materiali,id'],
             'id_cliente' => ['required','numeric','exists:clienti,id'],
-            'codice' => ['required','numeric'],
+            'codice' => ['required','max:80'],
             'descrizione' => ['required','max:80'],
             'perc_aggiunta_prezzo' => ['required', 'numeric','max:100'],
             'peso_articolo' => ['required','numeric'],
