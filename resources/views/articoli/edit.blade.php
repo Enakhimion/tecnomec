@@ -56,6 +56,7 @@
                         <tr>
                             <th scope="col">Descrizione</th>
                             <th scope="col">Tipo</th>
+                            <th scope="col">Tempo effettivo</th>
                             <th scope="col">QTA 1</th>
                             <th scope="col">QTA 2</th>
                             <th scope="col">QTA 3</th>
@@ -69,6 +70,7 @@
                             <tr>
                                 <td>{{ $interna['descrizione'] }}</td>
                                 <td>{{ $interna['tipo'] }}</td>
+                                <td>{{ round($interna['tempo_effettivo'], 2) }}</td>
                                 <td>{{ round($interna['qta1'], 4) }}</td>
                                 <td>{{ round($interna['qta2'], 4) }}</td>
                                 <td>{{ round($interna['qta3'], 4) }}</td>
@@ -87,6 +89,7 @@
                             <tr>
                                 <td>{{ $esterna['descrizione'] }}</td>
                                 <td>{{ $esterna['tipo'] }}</td>
+                                <td></td>
                                 <td>{{ round($esterna['qta1'], 4) }}</td>
                                 <td>{{ round($esterna['qta2'], 4) }}</td>
                                 <td>{{ round($esterna['qta3'], 4) }}</td>
@@ -105,6 +108,7 @@
                             <tr>
                                 <td>{{ $altri_costi['descrizione'] }}</td>
                                 <td>{{ $altri_costi['tipo'] }}</td>
+                                <td></td>
                                 <td>{{ round($altri_costi['qta1'], 4) }}</td>
                                 <td>{{ round($altri_costi['qta2'], 4) }}</td>
                                 <td>{{ round($altri_costi['qta3'], 4) }}</td>
