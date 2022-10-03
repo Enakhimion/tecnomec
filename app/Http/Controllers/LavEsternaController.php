@@ -99,8 +99,10 @@ class LavEsternaController extends Controller
      * @param  \App\Models\LavEsterna  $lavEsterna
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LavEsterna $lavEsterna)
+    public function destroy(Articolo $articolo,LavEsterna $lav_esterna)
     {
-        //
+        $lav_esterna->delete();
+        
+        return back()->with('success','Lavorazione eliminata correttamente');
     }
 }
