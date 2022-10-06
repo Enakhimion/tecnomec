@@ -15,7 +15,11 @@ class MaterialeController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'materiali' => \App\Models\Materiale::all()
+        ];
+
+        return view('materiali.index', $data);
     }
 
     /**
@@ -89,9 +93,30 @@ class MaterialeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Materiale $materiale)
     {
-        //
+        /*--- Inizio validazione input --*/
+
+        //Validazione dei campi presi in input
+        $validator = Validator::make(request()->all(),[
+            'nome' => ['required','max:250','unique:materiali,nome'],
+            'peso' => ['required','numeric'],
+            'base' => ['required','numeric'],
+            'extra' => ['required','numeric'],
+        ]);
+
+        //Validazione degli input
+        $validator->validate();
+
+        $materiale->update([
+            'nome' => $request->nome,
+            'peso' => $request->peso,
+            'base' => $request->base,
+            'extra' => $request->extra,
+            'prezzo_kg' => $request->base + $request->extra
+        ]);
+
+        return back()->with('success','Materiale aggiornato correttamente');
     }
 
     /**

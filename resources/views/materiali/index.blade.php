@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Macchinari') }}
+            {{ __('Materiali') }}
         </h2>
     </x-slot>
 
@@ -9,26 +9,26 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    @include('macchinari.create')
-                    <table id="macchinari" class="display">
+                    @include('materiali.create')
+                    <table id="materiali" class="display">
                     </table>
                 </div>
             </div>
         </div>
     </div>
 
-    @foreach($macchinari as $macchinario)
+    @foreach($materiali as $materiale)
 
-        @include('macchinari.edit')
+        @include('materiali.edit')
 
     @endforeach
 
     <script>
 
-        const macchinari = {!! $macchinari !!};
+        const materiali = {!! $materiali !!};
 
         $(document).ready( function () {
-            $('#macchinari').DataTable( {
+            $('#materiali').DataTable( {
 
                 paging:         false,
                 info:           false,
@@ -43,27 +43,32 @@
                         className: 'dt-body-center'
                     }
                 ],
-                data: macchinari,
+                data: materiali,
                 columns: [
                     {
                         data: 'nome',
-                        title: 'Macchinario',
+                        title: 'Materiali',
                         render: function ( data, type, row ) {
-                            return `<a href="#"  data-bs-toggle="modal" data-bs-target="#updateMacchinari${row.id }">${data}</a>`;
+                            return `<a href="#"  data-bs-toggle="modal" data-bs-target="#updateMateriali${row.id }">${data}</a>`;
                         }
                     },
                     {
-                        data: 'descrizione',
-                        title: 'Descrizione'
+                        data: 'peso',
+                        title: 'Peso'
                     },
                     {
-                        data: 'costo_orario_macchina',
-                        title: 'Costo orario macchina'
+                        data: 'base',
+                        title: 'Base'
                     },
                     {
-                        data: 'costo_orario_setup',
-                        title: 'Costo orario setup'
-                    }
+                        data: 'extra',
+                        title: 'Extra'
+                    },
+                    {
+                        data: 'prezzo_kg',
+                        title: 'Prezzo KG'
+                    },
+
                 ]
             } );
         } );
