@@ -40,6 +40,20 @@
                             echo Form::number('costo_utensileria', null,['step' => '0.01','autocomplete' => 'off','class' => 'form-control form-control-sm']);
                         @endphp
                     </div>
+                    {{-- Costo setup --}}
+                    <div class="col-sm">
+                        @php
+                            echo Form::label('costo_utensileria', 'Costo setup', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
+                            echo Form::number('costo_utensileria', null,['placeholder' => 'Se non valorizzato prende il valore del macchinario','autocomplete' => 'off','class' => 'form-control form-control-sm']);
+                        @endphp
+                    </div>
+                    {{-- Costo orario macchina --}}
+                    <div class="col-sm">
+                        @php
+                            echo Form::label('costo_orario_macchina', 'Costo orario macchina', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
+                            echo Form::number('costo_orario_macchina', null,['placeholder' => 'Se non valorizzato prende il valore del macchinario','autocomplete' => 'off','class' => 'form-control form-control-sm']);
+                        @endphp
+                    </div>
                     {{-- Minuti setup --}}
                     <div class="col-sm">
                         @php
@@ -58,7 +72,7 @@
                     <div class="col-sm">
                         @php
                             echo Form::label('tempo_pezzo', 'Tempo pezzo', ['class' => 'col-sm col-form-label col-form-label-sm']);
-                            echo Form::number('tempo_pezzo', null,['autocomplete' => 'off','class' => 'form-control form-control-sm']);
+                            echo Form::number('tempo_pezzo', null,['step' => '0.01','autocomplete' => 'off','class' => 'form-control form-control-sm']);
                         @endphp
                     </div>
 

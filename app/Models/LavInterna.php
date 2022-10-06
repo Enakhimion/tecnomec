@@ -19,6 +19,8 @@ class LavInterna extends Model
         'id_macchinario',
         'descrizione',
         'costo_utensileria',
+        'costo_setup',
+        'costo_orario_macchina',
         'minuti_setup',
         'perc_resa',
         'tempo_pezzo'

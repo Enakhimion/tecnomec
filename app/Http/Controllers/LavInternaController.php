@@ -44,6 +44,8 @@ class LavInternaController extends Controller
             'id_macchinario' => ['required','numeric','exists:macchinari,id'],
             'descrizione' => ['required','max:80'],
             'costo_utensileria' => ['required','numeric'],
+            'costo_setup' => ['nullable','numeric'],
+            'costo_orario_macchina' => ['nullable','numeric'],
             'minuti_setup' => ['required','numeric'],
             'perc_resa' => ['nullable','numeric'],
             'tempo_pezzo' => ['required','numeric'],
@@ -57,6 +59,8 @@ class LavInternaController extends Controller
             'id_macchinario' => $request->id_macchinario,
             'descrizione' => $request->descrizione,
             'costo_utensileria' => $request->costo_utensileria,
+            'costo_setup' => $request->costo_setup,
+            'costo_orario_macchina' => $request->costo_orario_macchina,
             'minuti_setup' => $request->minuti_setup,
             'perc_resa' => $request->perc_resa ?? 85,
             'tempo_pezzo' => $request->tempo_pezzo,
@@ -108,7 +112,7 @@ class LavInternaController extends Controller
     public function destroy(Articolo $articolo, LavInterna $lav_interna)
     {
         $lav_interna->delete();
-        
+
         return back()->with('success', "Lavorazione interna eliminata correttamente");
     }
 }

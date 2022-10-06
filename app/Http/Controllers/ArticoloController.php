@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AltroCosto;
 use App\Models\Articolo;
 use App\Models\Cliente;
 use App\Models\Macchinario;
@@ -94,6 +95,19 @@ class ArticoloController extends Controller
             'id_articolo' => $articolo->id,
             'data' => Carbon::now(),
             'qta1' => 0,
+        ]);
+
+        //Creo i costi di trasporto e consegna di default
+        AltroCosto::create([
+            'id_articolo' => $articolo->id,
+            'descrizione' => 'Consegna',
+            'importo' => 8
+        ]);
+
+        AltroCosto::create([
+            'id_articolo' => $articolo->id,
+            'descrizione' => 'Trasporto',
+            'importo' => 8
         ]);
 
         return redirect()->route('articoli.edit', $articolo)->with('success', 'Articolo inserito correttamente');
@@ -195,8 +209,19 @@ class ArticoloController extends Controller
                 foreach ($articolo->lav_interne as $lavorazione_interna){
 
                     $macchinario = $lavorazione_interna->macchinario;
-                    $costo_lavorazione = $lavorazione_interna->tempo_effettivo * ($macchinario->costo_orario_macchina / 3600);
-                    $costo_setup = $lavorazione_interna->minuti_setup / 60 * $macchinario->costo_orario_setup;
+
+                    //Se il costo macchina della lavorazione interna e null recupero il costo orario macchina del macchinario collegato
+                    if($lavorazione_interna->costo_orario_macchina === null){
+                        $lavorazione_interna->update(['costo_orario_macchina' => $macchinario->costo_orario_macchina]);
+                    }
+
+                    if($lavorazione_interna->costo_setup === null){
+                        $lavorazione_interna->update(['costo_setup' => $macchinario->costo_orario_setup]);
+                    }
+
+
+                    $costo_lavorazione = $lavorazione_interna->tempo_effettivo * ($lavorazione_interna->costo_orario_macchina / 3600);
+                    $costo_setup = $lavorazione_interna->minuti_setup / 60 * $lavorazione_interna->costo_setup;
                     $costo_setup_qta = $costo_setup / $qta;
                     $costo_utensileria_qta = $lavorazione_interna->costo_utensileria / $qta;
                     //TODO costo struttura farlo parametrico

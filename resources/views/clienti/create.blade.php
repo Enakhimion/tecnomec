@@ -43,7 +43,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
 
-                    {!! Form::submit('Salva Articolo', ['class' => 'btn btn-primary']) !!}
+                    {!! Form::submit('Salva cliente', ['class' => 'btn btn-primary']) !!}
 
                     {!! Form::close() !!}
                 </div>
