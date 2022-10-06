@@ -21,6 +21,16 @@
                         {{ __('Nuovo Articolo') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('macchinari.index')" :active="request()->routeIs('macchinari.index')" target="_blank">
+                        {{ __('Macchinari') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('materiali.index')" :active="request()->routeIs('materiali.index')" target="_blank">
+                        {{ __('Materiali') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

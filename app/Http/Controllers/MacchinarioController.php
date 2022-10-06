@@ -15,7 +15,11 @@ class MacchinarioController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'macchinari' => \App\Models\Macchinario::all()
+        ];
+
+        return view('macchinari.index', $data);
     }
 
     /**
@@ -90,7 +94,27 @@ class MacchinarioController extends Controller
      */
     public function update(Request $request, Macchinario $macchinario)
     {
-        //
+        /*--- Inizio validazione input --*/
+
+        //Validazione dei campi presi in input
+        $validator = Validator::make(request()->all(),[
+            'nome' => ['required','max:80'],
+            'descrizione' => ['required','max:80'],
+            'costo_orario_macchina' => ['required','numeric'],
+            'costo_orario_setup' => ['required','numeric'],
+        ]);
+
+        //Validazione degli input
+        $validator->validate();
+
+        $macchinario->update([
+            'nome' => $request->nome,
+            'descrizione' => $request->descrizione,
+            'costo_orario_macchina' => $request->costo_orario_macchina,
+            'costo_orario_setup' => $request->costo_orario_setup
+        ]);
+
+        return back()->with('success','Macchinario insertio correttamente');
     }
 
     /**
