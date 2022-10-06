@@ -75,6 +75,10 @@ class PreventivoController extends Controller
 
         //Validazione dei campi presi in input
         $validator = Validator::make(request()->all(),[
+            'ricarico_materiale' => ['required','numeric'],
+            'ricarico_interne' => ['required','numeric'],
+            'ricarico_esterne' => ['required','numeric'],
+            'ricarico_altro' => ['required','numeric'],
             'qta1' => ['required','numeric'],
             'qta2' => ['nullable','numeric'],
             'qta3' => ['nullable','numeric'],
@@ -90,6 +94,10 @@ class PreventivoController extends Controller
 
         //Aggiorno il preventivo
         $preventivo->update([
+            'ricarico_materiale' => $request->ricarico_materiale,
+            'ricarico_interne' => $request->ricarico_interne,
+            'ricarico_esterne' => $request->ricarico_esterne,
+            'ricarico_altro' => $request->ricarico_altro,
             'qta1' => $request->qta1,
             'qta2' => $request->qta2,
             'qta3' => $request->qta3,

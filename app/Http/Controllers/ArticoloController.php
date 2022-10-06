@@ -61,7 +61,6 @@ class ArticoloController extends Controller
             'id_cliente' => ['required','numeric','exists:clienti,id'],
             'codice' => ['required','max:80'],
             'descrizione' => ['required','max:80'],
-            'perc_aggiunta_prezzo' => ['required', 'numeric','max:100'],
             'peso_articolo' => ['required','numeric'],
             'lunghezza_tornito' => ['required','numeric'],
             'spessore_taglio' => ['nullable','numeric'],
@@ -80,7 +79,6 @@ class ArticoloController extends Controller
             'id_cliente' => $request->id_cliente,
             'codice' => $request->codice,
             'descrizione' => $request->descrizione,
-            'perc_aggiunta_prezzo' => $request->perc_aggiunta_pezzo ?? 5,
             'peso_articolo' => $request->peso_articolo,
             'lunghezza_tornito' => $request->lunghezza_tornito,
             'spessore_taglio' => $request->spessore_taglio ?? 3,
@@ -169,6 +167,7 @@ class ArticoloController extends Controller
         $recupero = ($articolo->lunghezza_tronchetto_totale - $articolo->lunghezza_tronchetto * $peso_tronchetto) * $articolo->recupero / 1000;
         $costo_mat_mm = $pesomm * $materiale->prezzo_kg;
         $costo_materiale = $articolo->is_contolavoro ? 0 : $costo_mat_mm * $articolo->lunghezza_tronchetto_totale - $recupero;
+        $costo_materiale = $costo_materiale / 100 * $preventivo->ricarico_materiale + $costo_materiale;
 
         $costi = [];
 
@@ -202,11 +201,14 @@ class ArticoloController extends Controller
                     $costo_utensileria_qta = $lavorazione_interna->costo_utensileria / $qta;
                     //TODO costo struttura farlo parametrico
                     $costo_struttura_qta = (1400 / 175 / 7) * ($lavorazione_interna->tempo_effettivo * $qta / 3600) / $qta;
+                    //Costo totale senza ricarico
+                    $tot = $costo_lavorazione + $costo_setup_qta + $costo_utensileria_qta + $costo_struttura_qta;
 
                     if(isset($costo[$i]['lav_interne'])){
-                        $costo[$i]['lav_interne'] += $costo_lavorazione + $costo_setup_qta + $costo_utensileria_qta;
+
+                        $costo[$i]['lav_interne'] += $tot / 100 * $preventivo->ricarico_interne + $tot;
                     }else{
-                        $costo[$i]['lav_interne'] = $costo_lavorazione + $costo_setup_qta + $costo_utensileria_qta;
+                        $costo[$i]['lav_interne'] = $tot / 100 * $preventivo->ricarico_interne + $tot;
                     }
 
                     //In base al numero decido che key dargli
@@ -257,9 +259,9 @@ class ArticoloController extends Controller
                     }
 
                     if(isset($costo[$i]['lav_esterne'])){
-                        $costo[$i]['lav_esterne'] += $costo_lavorazione_esterna;
+                        $costo[$i]['lav_esterne'] += $costo_lavorazione_esterna / 100 * $preventivo->ricarico_esterne + $costo_lavorazione_esterna;
                     }else{
-                        $costo[$i]['lav_esterne'] = $costo_lavorazione_esterna;
+                        $costo[$i]['lav_esterne'] = $costo_lavorazione_esterna / 100 * $preventivo->ricarico_esterne + $costo_lavorazione_esterna;
                     }
 
                     //In base al numero decido che key dargli
@@ -290,10 +292,13 @@ class ArticoloController extends Controller
                 //Calcolo altri costi
                 foreach ($articolo->altri_costi as $altro_costo){
 
+                    //Importo degli altri costi
+                    $costo_altro = $altro_costo->importo / $qta;
+
                     if(isset($costo[$i]['altri_costi'])){
-                        $costo[$i]['altri_costi'] += $altro_costo->importo / $qta;
+                        $costo[$i]['altri_costi'] += $costo_altro / 100 * $preventivo->ricarico_esterne + $costo_altro;
                     }else{
-                        $costo[$i]['altri_costi'] = $altro_costo->importo / $qta;
+                        $costo[$i]['altri_costi'] = $costo_altro / 100 * $preventivo->ricarico_esterne + $costo_altro;
                     }
 
                     //In base al numero decido che key dargli
@@ -323,9 +328,6 @@ class ArticoloController extends Controller
 
                 //Totalone
                 $costo[$i]['costo'] = $costo[$i]['altri_costi'] + $costo[$i]['lav_esterne'] + $costo[$i]['lav_interne'] + $costo_materiale;
-
-                //Calcolo il ricarico
-                $costo[$i]['costo'] =  $costo[$i]['costo'] / 100 * $articolo->perc_aggiunta_prezzo + $costo[$i]['costo'];
 
             }else{
 
@@ -373,7 +375,6 @@ class ArticoloController extends Controller
             'id_cliente' => ['required','numeric','exists:clienti,id'],
             'codice' => ['required','max:80'],
             'descrizione' => ['required','max:80'],
-            'perc_aggiunta_prezzo' => ['required', 'numeric','max:100'],
             'peso_articolo' => ['required','numeric'],
             'lunghezza_tornito' => ['required','numeric'],
             'spessore_taglio' => ['nullable','numeric'],
@@ -392,7 +393,6 @@ class ArticoloController extends Controller
             'id_cliente' => $request->id_cliente,
             'codice' => $request->codice,
             'descrizione' => $request->descrizione,
-            'perc_aggiunta_prezzo' => $request->perc_aggiunta_prezzo ?? 5,
             'peso_articolo' => $request->peso_articolo,
             'lunghezza_tornito' => $request->lunghezza_tornito,
             'spessore_taglio' => $request->spessore_taglio ?? 3,

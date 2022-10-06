@@ -19,7 +19,6 @@ class Articolo extends Model
         'id_cliente',
         'codice',
         'descrizione',
-        'perc_aggiunta_prezzo',
         'peso_articolo',
         'lunghezza_tornito',
         'spessore_taglio',

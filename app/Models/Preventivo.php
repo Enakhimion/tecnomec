@@ -17,6 +17,10 @@ class Preventivo extends Model
     protected $fillable = [
         'id_articolo',
         'data',
+        'ricarico_materiale',
+        'ricarico_interne',
+        'ricarico_esterne',
+        'ricarico_altro',
         'qta1',
         'qta2',
         'qta3',
