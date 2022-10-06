@@ -154,28 +154,4 @@
     </div>
 </div>
 
-{{-- Campi calcolati --}}
-
-<div class="form-group row mb-3 mt-3">
-    {{-- Percentuale Ricarico--}}
-    <div class="col-sm">
-        @php
-            echo Form::label('perc_aggiunta_prezzo', '% Ricarico', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
-            echo Form::number('perc_aggiunta_prezzo',null,['placeholder' => '5','class' => 'form-control form-control-sm '. ($errors->has('perc_aggiunta_prezzo') ? ' is-invalid' : null)]);
-        @endphp
-
-        @error('perc_aggiunta_prezzo')<div class="invalid-feedback">{{ $message  }}</div>@enderror
-    </div>
-    <div class="col-sm">
-    </div>
-    <div class="col-sm">
-    </div>
-    <div class="col-sm">
-    </div>
-    <div class="col-sm">
-    </div>
-    <div class="col-sm">
-    </div>
-</div>
-
 

@@ -17,6 +17,8 @@ class Materiale extends Model
     protected $fillable = [
         'nome',
         'peso',
+        'base',
+        'extra',
         'prezzo_kg'
     ];
 

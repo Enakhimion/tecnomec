@@ -42,7 +42,8 @@ class MaterialeController extends Controller
         $validator = Validator::make(request()->all(),[
             'nome' => ['required','max:250','unique:materiali,nome'],
             'peso' => ['required','numeric'],
-            'prezzo_kg' => ['required','numeric'],
+            'base' => ['required','numeric'],
+            'extra' => ['required','numeric'],
         ]);
 
         //Validazione degli input
@@ -51,7 +52,9 @@ class MaterialeController extends Controller
         Materiale::create([
             'nome' => $request->nome,
             'peso' => $request->peso,
-            'prezzo_kg' => $request->prezzo_kg
+            'base' => $request->base,
+            'extra' => $request->extra,
+            'prezzo_kg' => $request->base + $request->extra
         ]);
 
         return back()->with('success','Materiale inserito correttamente');
