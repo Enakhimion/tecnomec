@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Articolo;
 use App\Models\Preventivo;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -115,10 +116,20 @@ class PreventivoController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Preventivo  $preventivo
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Preventivo $preventivo)
+    public function destroy(Articolo $articolo, Preventivo $preventivo)
     {
-        //
+        //Elimino il preventivo
+        $preventivo->delete();
+
+        //Creo anche il preventivo
+        Preventivo::create([
+            'id_articolo' => $articolo->id,
+            'data' => Carbon::now(),
+            'qta1' => 0,
+        ]);
+
+        return back()->with('success','Preventivo eliminato con successo');
     }
 }

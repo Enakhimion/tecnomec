@@ -40,7 +40,7 @@
     {{-- Peso --}}
     <div class="col-sm">
         @php
-            echo Form::label('peso_articolo', 'Peso', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::label('peso_articolo', 'Peso in Gr.', ['class' => 'col-sm col-form-label col-form-label-sm']);
             echo Form::text('peso_articolo',null,['class' => 'form-control form-control-sm '. ($errors->has('peso_articolo') ? ' is-invalid' : null)]);
         @endphp
 
@@ -49,7 +49,7 @@
     {{-- Lunghezza articolo tornito --}}
     <div class="col-sm">
         @php
-            echo Form::label('lunghezza_tornito', 'Lunghezza Tornito', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::label('lunghezza_tornito', 'Lunghezza Tornito in mm', ['class' => 'col-sm col-form-label col-form-label-sm']);
             echo Form::text('lunghezza_tornito',null,['class' => 'form-control form-control-sm '. ($errors->has('lunghezza_tornito') ? ' is-invalid' : null)]);
         @endphp
 

@@ -64,3 +64,9 @@
 {!! Form::submit('Aggiorna preventivo', ['class' => 'btn btn-primary']) !!}
 
 {!! Form::close() !!}
+
+<form id="destroy-form" action="{{ route('preventivi.destroy',[$articolo, $articolo->preventivi[0]]) }}" method="POST" class="mt-5">
+    @method('DELETE')
+    {!! Form::submit('Elimina preventivo', ['class' => 'btn btn-danger']) !!}
+    @csrf
+</form>
