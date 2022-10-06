@@ -86,11 +86,30 @@ class LavEsternaController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\LavEsterna  $lavEsterna
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, LavEsterna $lavEsterna)
+    public function update(Request $request, Articolo $articolo, LavEsterna $lav_esterna)
     {
-        //
+        /*--- Inizio validazione input --*/
+
+        //Validazione dei campi presi in input
+        $validator = Validator::make(request()->all(),[
+            'id_tipologia' => ['required','numeric','exists:tipologie_lav_esterne,id'],
+            'descrizione' => ['required','max:80'],
+            'importo' => ['required','numeric'],
+        ]);
+
+        //Validazione degli input
+        $validator->validate();
+
+        $lav_esterna->update([
+            'id_articolo' => $articolo->id,
+            'id_tipologia' => $request->id_tipologia,
+            'descrizione' => $request->descrizione,
+            'importo' => $request->importo
+        ]);
+
+        return back()->with('success','Lavorazione esterna aggiornata correttamente');
     }
 
     /**
@@ -102,7 +121,7 @@ class LavEsternaController extends Controller
     public function destroy(Articolo $articolo,LavEsterna $lav_esterna)
     {
         $lav_esterna->delete();
-        
+
         return back()->with('success','Lavorazione eliminata correttamente');
     }
 }

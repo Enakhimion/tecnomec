@@ -18,22 +18,9 @@
 
                 {!! Form::open(['url' => route('altri_costi.store', $articolo)]) !!}
 
-                <div class="form-group row mb-3 mt-3">
-                    {{-- Descrizione --}}
-                    <div class="col-sm">
-                        @php
-                            echo Form::label('descrizione', 'Descrizione', ['class' => 'col-sm col-form-label col-form-label-sm']);
-                            echo Form::text('descrizione', null,['autocomplete' => 'off','class' => 'form-control form-control-sm']);
-                        @endphp
-                    </div>
-                    {{-- Importo --}}
-                    <div class="col-sm">
-                        @php
-                            echo Form::label('importo', 'Importo', ['class' => 'col-sm col-form-label col-form-label-sm']);
-                            echo Form::number('importo', null,['step' => '0.01','autocomplete' => 'off','class' => 'form-control form-control-sm']);
-                        @endphp
-                    </div>
-                </div>
+
+                @include('altri_costi.modules.form')
+
 
             </div>
             <div class="modal-footer">

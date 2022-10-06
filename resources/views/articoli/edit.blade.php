@@ -65,10 +65,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($elenco_interne as $interna)
+                        @foreach($elenco_interne as $id => $interna)
 
                             <tr>
-                                <td>{{ $interna['descrizione'] }}</td>
+                                <td><a href="#" data-bs-toggle="modal" data-bs-target="#lavInterna{{ $id }}">{{ $interna['descrizione'] }}</a></td>
                                 <td>{{ $interna['tipo'] }}</td>
                                 <td>{{ round($interna['tempo_effettivo'], 2) }}</td>
                                 <td>{{ isset($interna['qta1']) ? round($interna['qta1'], 4) : "-" }}</td>
@@ -84,10 +84,10 @@
 
                         @endforeach
 
-                        @foreach($elenco_esterne as $esterna)
+                        @foreach($elenco_esterne as $id => $esterna)
 
                             <tr>
-                                <td>{{ $esterna['descrizione'] }}</td>
+                                <td><a href="#" data-bs-toggle="modal" data-bs-target="#lavEsterna{{ $id }}">{{ $esterna['descrizione'] }}</a></td>
                                 <td>{{ $esterna['tipo'] }}</td>
                                 <td></td>
                                 <td>{{ isset($esterna['qta1']) ? round($esterna['qta1'], 4) : "-"  }}</td>
@@ -103,10 +103,10 @@
 
                         @endforeach
 
-                        @foreach($elenco_altri_costi as $altri_costi)
+                        @foreach($elenco_altri_costi as $id => $altri_costi)
 
                             <tr>
-                                <td>{{ $altri_costi['descrizione'] }}</td>
+                                <td><a href="#" data-bs-toggle="modal" data-bs-target="#lavAltroCosto{{ $id }}">{{ $altri_costi['descrizione'] }}</a></td>
                                 <td>{{ $altri_costi['tipo'] }}</td>
                                 <td></td>
                                 <td>{{ isset($altri_costi['qta1']) ? round($altri_costi['qta1'], 4) : "-" }}</td>
@@ -130,5 +130,59 @@
             </div>
         </div>
     </div>
+
+    @foreach($elenco_interne as $id => $interna)
+
+        @php
+
+        $lav_interna = \App\Models\LavInterna::find($id);
+
+        @endphp
+
+        @include('lav_interne.edit')
+
+
+    @endforeach
+
+    @foreach($elenco_interne as $id => $interna)
+
+        @php
+
+            $lav_interna = \App\Models\LavInterna::find($id);
+
+        @endphp
+
+        @include('lav_interne.edit')
+
+
+    @endforeach
+
+    @foreach($elenco_esterne as $id => $esterna)
+
+        @php
+
+            $lav_esterna = \App\Models\LavEsterna::find($id);
+
+        @endphp
+
+        @include('lav_esterne.edit')
+
+
+    @endforeach
+
+    @foreach($elenco_altri_costi as $id => $altri_costi)
+
+        @php
+
+            $altro_costo = \App\Models\AltroCosto::find($id);
+
+        @endphp
+
+        @include('altri_costi.edit')
+
+
+    @endforeach
+
+
 
 </x-app-layout>

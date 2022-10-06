@@ -84,11 +84,28 @@ class AltroCostoController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\AltroCosto  $altroCosto
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, AltroCosto $altroCosto)
+    public function update(Request $request, Articolo $articolo, AltroCosto $altro_costo)
     {
-        //
+        /*--- Inizio validazione input --*/
+
+        //Validazione dei campi presi in input
+        $validator = Validator::make(request()->all(),[
+            'descrizione' => ['required','max:80'],
+            'importo' => ['required','numeric'],
+        ]);
+
+        //Validazione degli input
+        $validator->validate();
+
+        $altro_costo->update([
+            'id_articolo' => $articolo->id,
+            'descrizione' => $request->descrizione,
+            'importo' => $request->importo
+        ]);
+
+        return back()->with('success','Altro costo aggiornato correttamente');
     }
 
     /**

@@ -96,11 +96,40 @@ class LavInternaController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\LavInterna  $lavInterna
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, LavInterna $lavInterna)
+    public function update(Request $request, Articolo $articolo, LavInterna $lav_interna)
     {
-        //
+        /*--- Inizio validazione input --*/
+
+        //Validazione dei campi presi in input
+        $validator = Validator::make(request()->all(),[
+            'id_macchinario' => ['required','numeric','exists:macchinari,id'],
+            'descrizione' => ['required','max:80'],
+            'costo_utensileria' => ['required','numeric'],
+            'costo_setup' => ['nullable','numeric'],
+            'costo_orario_macchina' => ['nullable','numeric'],
+            'minuti_setup' => ['required','numeric'],
+            'perc_resa' => ['nullable','numeric'],
+            'tempo_pezzo' => ['required','numeric'],
+        ]);
+
+        //Validazione degli input
+        $validator->validate();
+
+        $lav_interna->update([
+            'id_articolo' => $articolo->id,
+            'id_macchinario' => $request->id_macchinario,
+            'descrizione' => $request->descrizione,
+            'costo_utensileria' => $request->costo_utensileria,
+            'costo_setup' => $request->costo_setup,
+            'costo_orario_macchina' => $request->costo_orario_macchina,
+            'minuti_setup' => $request->minuti_setup,
+            'perc_resa' => $request->perc_resa ?? 85,
+            'tempo_pezzo' => $request->tempo_pezzo,
+        ]);
+
+        return back()->with('success','Lavorazione interna aggiornata correttamente');
     }
 
     /**
