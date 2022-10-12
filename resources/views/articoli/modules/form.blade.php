@@ -50,7 +50,7 @@
     <div class="col-sm">
         @php
             echo Form::label('peso_articolo', 'Peso in Gr.', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
-            echo Form::text('peso_articolo',0.001,['step' => '0.001','class' => 'form-control form-control-sm '. ($errors->has('peso_articolo') ? ' is-invalid' : null)]);
+            echo Form::text('peso_articolo',(isset($articolo) ? null : 0.001),['step' => '0.001','class' => 'form-control form-control-sm '. ($errors->has('peso_articolo') ? ' is-invalid' : null)]);
         @endphp
 
         @error('peso_articolo')<div class="invalid-feedback">{{ $message }}</div>@enderror

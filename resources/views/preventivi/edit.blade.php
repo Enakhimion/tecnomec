@@ -17,6 +17,8 @@
     <tbody>
     <tr>
         <td>Ricarico</td>
+        <td></td>
+        <td></td>
         <td>{{ Form::number('ricarico_materiale',null,['class' => 'form-control form-control-sm '. ($errors->has('ricarico_materiale') ? ' is-invalid' : null)]) }}</td>
         <td>{{ Form::number('ricarico_interne',null,['class' => 'form-control form-control-sm '. ($errors->has('ricarico_interne') ? ' is-invalid' : null)]) }}</td>
         <td>{{ Form::number('ricarico_esterne',null,['class' => 'form-control form-control-sm '. ($errors->has('ricarico_esterne') ? ' is-invalid' : null)]) }}</td>
