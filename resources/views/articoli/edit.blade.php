@@ -90,10 +90,10 @@
                                 <td><a href="#" data-bs-toggle="modal" data-bs-target="#lavEsterna{{ $id }}">{{ $esterna['descrizione'] }}</a></td>
                                 <td>{{ $esterna['tipo'] }}</td>
                                 <td></td>
-                                <td>{{ isset($esterna['qta1']) ? round($esterna['qta1'], 4) : "-"  }}</td>
-                                <td>{{ isset($esterna['qta2']) ? round($esterna['qta2'], 4) : "-"  }}</td>
-                                <td>{{ isset($esterna['qta3']) ? round($esterna['qta3'], 4) : "-"  }}</td>
-                                <td>{{ isset($esterna['qta4']) ? round($esterna['qta4'], 4) : "-"  }}</td>
+                                <td>{{ isset($esterna['qta1']) ? round($esterna['qta1'], 7) : "-"  }}</td>
+                                <td>{{ isset($esterna['qta2']) ? round($esterna['qta2'], 7) : "-"  }}</td>
+                                <td>{{ isset($esterna['qta3']) ? round($esterna['qta3'], 7) : "-"  }}</td>
+                                <td>{{ isset($esterna['qta4']) ? round($esterna['qta4'], 7) : "-"  }}</td>
                                 <form id="destroy-form" action="{{ $esterna['delete'] }}" method="POST" style="display: none;">
                                     @method('DELETE')
                                     <td>{!! Form::submit('Elimina', ['class' => 'btn btn-danger']) !!}</td>
