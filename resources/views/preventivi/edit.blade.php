@@ -4,8 +4,8 @@
     <thead>
     <tr>
         <th scope="col">Qunatita</th>
-        <th scope="col">Gr materiale</th>
         <th scope="col">Mm materiale</th>
+        <th scope="col">Gr materiale</th>
         <th scope="col">Materiale</th>
         <th scope="col">Lavorazioni Interne</th>
         <th scope="col">Lavorazioni Esterne</th>
