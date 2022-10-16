@@ -22,7 +22,7 @@
 {{-- Extra --}}
 <div class="col-sm">
     @php
-        echo Form::label('extra', 'Extra (se non presente inserire 0)', ['class' => 'col-sm col-form-label col-form-label-sm']);
-        echo Form::number('extra', null,['step' => '0.001','autocomplete' => 'off','class' => 'form-control form-control-sm']);
+        echo Form::label('extra', 'Extra', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
+        echo Form::number('extra', null,['placeholder' => '0','step' => '0.001','autocomplete' => 'off','class' => 'form-control form-control-sm']);
     @endphp
 </div>
