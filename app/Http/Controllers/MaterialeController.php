@@ -47,7 +47,7 @@ class MaterialeController extends Controller
             'nome' => ['required','max:250','unique:materiali,nome'],
             'peso' => ['required','numeric'],
             'base' => ['required','numeric'],
-            'extra' => ['required','numeric'],
+            'extra' => ['nullable','numeric'],
         ]);
 
         //Validazione degli input
@@ -57,7 +57,7 @@ class MaterialeController extends Controller
             'nome' => $request->nome,
             'peso' => $request->peso,
             'base' => $request->base,
-            'extra' => $request->extra,
+            'extra' => $request->extra ?? 0, //Se è null inserisco 0
             'prezzo_kg' => $request->base + $request->extra
         ]);
 
