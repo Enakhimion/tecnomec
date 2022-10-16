@@ -15,7 +15,11 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'clienti' => \App\Models\Cliente::all()
+        ];
+
+        return view('clienti.index', $data);
     }
 
     /**
@@ -84,9 +88,25 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Cliente $cliente)
     {
-        //
+        /*--- Inizio validazione input --*/
+
+        //Validazione dei campi presi in input
+        $validator = Validator::make(request()->all(),[
+            'nome' => ['required','max:250','unique:clienti,nome'],
+            'desinenza' => ['required','max:250'],
+        ]);
+
+        //Validazione degli input
+        $validator->validate();
+
+        $cliente->update([
+            'nome' => $request->nome,
+            'desinenza' => $request->desinenza
+        ]);
+
+        return back()->with('success','Cliente aggiornato correttamente');
     }
 
     /**

@@ -31,6 +31,11 @@
                         {{ __('Materiali') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('clienti.index')" :active="request()->routeIs('clienti.index')" target="_blank">
+                        {{ __('Clienti') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
