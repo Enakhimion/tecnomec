@@ -136,7 +136,7 @@
     {{-- Lunghezza scarto pezzo mozzicone --}}
     <div class="col-sm">
         @php
-            echo Form::label('lunghezza_scarto_pezzo_mozzicone', 'Lunghezza scarto pezzo mozzicone mm', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::label('lunghezza_scarto_pezzo_mozzicone', 'Lung. scarto pezzo mozzicone mm', ['class' => 'col-sm col-form-label col-form-label-sm']);
             echo Form::text('lunghezza_scarto_pezzo_mozzicone', null,['disabled','autocomplete' => 'off','class' => 'form-control form-control-sm']);
         @endphp
     </div>
