@@ -8,7 +8,7 @@
 {{-- Peso --}}
 <div class="col-sm">
     @php
-        echo Form::label('peso', 'Peso', ['class' => 'col-sm col-form-label col-form-label-sm']);
+        echo Form::label('peso', 'Peso KG al Mt', ['class' => 'col-sm col-form-label col-form-label-sm']);
         echo Form::text('peso', null,['autocomplete' => 'off','class' => 'form-control form-control-sm']);
     @endphp
 </div>
