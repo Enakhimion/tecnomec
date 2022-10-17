@@ -57,6 +57,7 @@
                             <th scope="col">Descrizione</th>
                             <th scope="col">Tipo</th>
                             <th scope="col">Tempo effettivo</th>
+                            <th scope="col">Importo</th>
                             <th scope="col">QTA 1</th>
                             <th scope="col">QTA 2</th>
                             <th scope="col">QTA 3</th>
@@ -70,6 +71,7 @@
                             <tr>
                                 <td><a href="#" data-bs-toggle="modal" data-bs-target="#lavInterna{{ $id }}">{{ $interna['descrizione'] }}</a></td>
                                 <td>{{ $interna['tipo'] }}</td>
+                                <td></td>
                                 <td>{{ round($interna['tempo_effettivo'], 2) }}</td>
                                 <td>{{ isset($interna['qta1']) ? round($interna['qta1'], 4) : "-" }}</td>
                                 <td>{{ isset($interna['qta2']) ? round($interna['qta2'], 4) : "-" }}</td>
@@ -90,6 +92,7 @@
                                 <td><a href="#" data-bs-toggle="modal" data-bs-target="#lavEsterna{{ $id }}">{{ $esterna['descrizione'] }}</a></td>
                                 <td>{{ $esterna['tipo'] }}</td>
                                 <td></td>
+                                <td>{{ $esterna['importo'] }}</td>
                                 <td>{{ isset($esterna['qta1']) ? round($esterna['qta1'], 7) : "-"  }}</td>
                                 <td>{{ isset($esterna['qta2']) ? round($esterna['qta2'], 7) : "-"  }}</td>
                                 <td>{{ isset($esterna['qta3']) ? round($esterna['qta3'], 7) : "-"  }}</td>
@@ -109,10 +112,11 @@
                                 <td><a href="#" data-bs-toggle="modal" data-bs-target="#lavAltroCosto{{ $id }}">{{ $altri_costi['descrizione'] }}</a></td>
                                 <td>{{ $altri_costi['tipo'] }}</td>
                                 <td></td>
-                                <td>{{ isset($altri_costi['qta1']) ? number_format(round($altri_costi['qta1'], 5)) : "-" }}</td>
-                                <td>{{ isset($altri_costi['qta2']) ? number_format(round($altri_costi['qta2'], 5)) : "-" }}</td>
-                                <td>{{ isset($altri_costi['qta3']) ? number_format(round($altri_costi['qta3'], 5)) : "-" }}</td>
-                                <td>{{ isset($altri_costi['qta4']) ? number_format(round($altri_costi['qta4'], 5)) : "-" }}</td>
+                                <td>{{ $altri_costi['importo'] }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <form id="destroy-form" action="{{ $altri_costi['delete'] }}" method="POST" style="display: none;">
                                     @method('DELETE')
                                     <td>{!! Form::submit('Elimina', ['class' => 'btn btn-danger']) !!}</td>
