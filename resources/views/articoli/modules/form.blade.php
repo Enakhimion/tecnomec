@@ -63,7 +63,7 @@
     {{-- Spessore Taglio --}}
     <div class="col-sm">
         @php
-            echo Form::label('spessore_taglio', 'Spessore taglio', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
+            echo Form::label('spessore_taglio', 'Spessore taglio mm', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
             echo Form::number('spessore_taglio', null,['step' => '0.001','placeholder' => '3','autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('spessore_taglio') ? ' is-invalid' : null)]);
         @endphp
 
@@ -72,7 +72,7 @@
     {{-- Sovrametallo --}}
     <div class="col-sm">
         @php
-            echo Form::label('sovrametallo', 'Sovrametallo', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
+            echo Form::label('sovrametallo', 'Sovrametallo mm', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
             echo Form::number('sovrametallo', null,['step' => '0.001','placeholder' => '0,5','autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('sovrametallo') ? ' is-invalid' : null)]);
         @endphp
 
@@ -81,7 +81,7 @@
     {{-- Lunghezza Barra --}}
     <div class="col-sm">
         @php
-            echo Form::label('lunghezza_barra', 'Lunghezza barra', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
+            echo Form::label('lunghezza_barra', 'Lunghezza barra mm', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
             echo Form::number('lunghezza_barra',null,['placeholder' => '3000','class' => 'form-control form-control-sm '. ($errors->has('lunghezza_barra') ? ' is-invalid' : null)]);
         @endphp
 
@@ -90,7 +90,7 @@
     {{-- Lunghezza spezzone --}}
     <div class="col-sm">
         @php
-            echo Form::label('lunghezza_spezzone', 'Lunghezza spezzone', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
+            echo Form::label('lunghezza_spezzone', 'Lunghezza spezzone mm', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
             echo Form::number('lunghezza_spezzone',null,['step' => '0.001','placeholder' => '150','class' => 'form-control form-control-sm '. ($errors->has('lunghezza_spezzone') ? ' is-invalid' : null)]);
         @endphp
 
@@ -99,7 +99,7 @@
     {{-- Recupero --}}
     <div class="col-sm">
         @php
-            echo Form::label('recupero', 'Recupero', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
+            echo Form::label('recupero', 'Recupero Gr', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
             echo Form::text('recupero',null,['step' => '0.001','placeholder' => '0,1','class' => 'form-control form-control-sm '. ($errors->has('recupero') ? ' is-invalid' : null)]);
         @endphp
 
@@ -122,7 +122,7 @@
     {{-- Lunghezza tronchetto --}}
     <div class="col-sm">
         @php
-            echo Form::label('lunghezza_tronchetto', 'Lunghezza tronchetto', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::label('lunghezza_tronchetto', 'Lunghezza tronchetto mm', ['class' => 'col-sm col-form-label col-form-label-sm']);
             echo Form::text('lunghezza_tronchetto', null,['disabled','autocomplete' => 'off','class' => 'form-control form-control-sm']);
         @endphp
     </div>
@@ -136,14 +136,14 @@
     {{-- Lunghezza scarto pezzo mozzicone --}}
     <div class="col-sm">
         @php
-            echo Form::label('lunghezza_scarto_pezzo_mozzicone', 'Lunghezza scarto pezzo mozzicone', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::label('lunghezza_scarto_pezzo_mozzicone', 'Lunghezza scarto pezzo mozzicone mm', ['class' => 'col-sm col-form-label col-form-label-sm']);
             echo Form::text('lunghezza_scarto_pezzo_mozzicone', null,['disabled','autocomplete' => 'off','class' => 'form-control form-control-sm']);
         @endphp
     </div>
     {{-- Lunghezza tronchetto totale --}}
     <div class="col-sm">
         @php
-            echo Form::label('lunghezza_tronchetto_totale', 'Lunghezza tronchetto totale', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::label('lunghezza_tronchetto_totale', 'Lunghezza tronchetto totale mm', ['class' => 'col-sm col-form-label col-form-label-sm']);
             echo Form::text('lunghezza_tronchetto_totale', null,['disabled','autocomplete' => 'off','class' => 'form-control form-control-sm']);
         @endphp
     </div>
