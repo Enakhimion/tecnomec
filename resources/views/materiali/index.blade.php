@@ -54,7 +54,7 @@
                     },
                     {
                         data: 'peso',
-                        title: 'Peso'
+                        title: 'Peso KG al Mt'
                     },
                     {
                         data: 'base',
