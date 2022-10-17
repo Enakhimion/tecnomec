@@ -359,7 +359,7 @@ class ArticoloController extends Controller
                 $costo[$i]['costo'] = $costo[$i]['altri_costi'] + $costo[$i]['lav_esterne'] + $costo[$i]['lav_interne'] + $costo_materiale;
 
                 $costo[$i]['lunghezza'] = ceil($articolo->lunghezza_tronchetto_totale * $qta / $articolo->lunghezza_barra);
-                $costo[$i]['peso'] = $materiale->peso * ($articolo->lunghezza_barra / 1000) * $costo[$i]['lunghezza'];
+                $costo[$i]['peso'] = ceil($materiale->peso * ($articolo->lunghezza_barra / 1000) * $costo[$i]['lunghezza']);
 
             }else{
 
