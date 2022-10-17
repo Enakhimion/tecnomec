@@ -71,8 +71,8 @@
                             <tr>
                                 <td><a href="#" data-bs-toggle="modal" data-bs-target="#lavInterna{{ $id }}">{{ $interna['descrizione'] }}</a></td>
                                 <td>{{ $interna['tipo'] }}</td>
-                                <td></td>
                                 <td>{{ round($interna['tempo_effettivo'], 2) }}</td>
+                                <td></td>
                                 <td>{{ isset($interna['qta1']) ? round($interna['qta1'], 4) : "-" }}</td>
                                 <td>{{ isset($interna['qta2']) ? round($interna['qta2'], 4) : "-" }}</td>
                                 <td>{{ isset($interna['qta3']) ? round($interna['qta3'], 4) : "-" }}</td>
