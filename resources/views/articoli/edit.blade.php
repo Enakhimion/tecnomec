@@ -109,10 +109,10 @@
                                 <td><a href="#" data-bs-toggle="modal" data-bs-target="#lavAltroCosto{{ $id }}">{{ $altri_costi['descrizione'] }}</a></td>
                                 <td>{{ $altri_costi['tipo'] }}</td>
                                 <td></td>
-                                <td>{{ isset($altri_costi['qta1']) ? round($altri_costi['qta1'], 5) : "-" }}</td>
-                                <td>{{ isset($altri_costi['qta2']) ? round($altri_costi['qta2'], 5) : "-" }}</td>
-                                <td>{{ isset($altri_costi['qta3']) ? round($altri_costi['qta3'], 5) : "-" }}</td>
-                                <td>{{ isset($altri_costi['qta4']) ? round($altri_costi['qta4'], 5) : "-" }}</td>
+                                <td>{{ isset($altri_costi['qta1']) ? number_format(round($altri_costi['qta1'], 5)) : "-" }}</td>
+                                <td>{{ isset($altri_costi['qta2']) ? number_format(round($altri_costi['qta2'], 5)) : "-" }}</td>
+                                <td>{{ isset($altri_costi['qta3']) ? number_format(round($altri_costi['qta3'], 5)) : "-" }}</td>
+                                <td>{{ isset($altri_costi['qta4']) ? number_format(round($altri_costi['qta4'], 5)) : "-" }}</td>
                                 <form id="destroy-form" action="{{ $altri_costi['delete'] }}" method="POST" style="display: none;">
                                     @method('DELETE')
                                     <td>{!! Form::submit('Elimina', ['class' => 'btn btn-danger']) !!}</td>
