@@ -358,7 +358,7 @@ class ArticoloController extends Controller
                 //Totalone
                 $costo[$i]['costo'] = $costo[$i]['altri_costi'] + $costo[$i]['lav_esterne'] + $costo[$i]['lav_interne'] + $costo_materiale;
 
-                $costo[$i]['lunghezza'] = $articolo->lunghezza_tronchetto_totale * $qta;
+                $costo[$i]['lunghezza'] = $articolo->lunghezza_tronchetto_totale * $qta / $articolo->lunghezza_barra;
                 $costo[$i]['peso'] = $articolo->peso_articolo * $qta;
 
             }else{
