@@ -29,7 +29,7 @@
 {{-- Costo orario macchina --}}
 <div class="col-sm">
     @php
-        echo Form::label('costo_orario_macchina', 'Costo orario macchina', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
+        echo Form::label('costo_orario_macchina', 'Costo orario macchina', ['step' => '0.01','class' => 'default-text col-sm col-form-label col-form-label-sm']);
         echo Form::number('costo_orario_macchina', null,['placeholder' => 'Se non valorizzato prende il valore del macchinario','autocomplete' => 'off','class' => 'form-control form-control-sm']);
     @endphp
 </div>
