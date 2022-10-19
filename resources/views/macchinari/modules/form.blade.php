@@ -23,6 +23,6 @@
 <div class="col-sm">
     @php
         echo Form::label('costo_orario_setup', 'Costo orario setup', ['class' => 'col-sm col-form-label col-form-label-sm']);
-        echo Form::number('costo_orario_setup', null,['autocomplete' => 'off','class' => 'form-control form-control-sm']);
+        echo Form::number('costo_orario_setup', null,['step' => '0.01','autocomplete' => 'off','class' => 'form-control form-control-sm']);
     @endphp
 </div>

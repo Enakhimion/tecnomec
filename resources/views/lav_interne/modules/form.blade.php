@@ -23,7 +23,7 @@
 <div class="col-sm">
     @php
         echo Form::label('costo_setup', 'Costo setup', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
-        echo Form::number('costo_setup', null,['placeholder' => 'Se non valorizzato prende il valore del macchinario','autocomplete' => 'off','class' => 'form-control form-control-sm']);
+        echo Form::number('costo_setup', null,['step' => '0.01','placeholder' => 'Se non valorizzato prende il valore del macchinario','autocomplete' => 'off','class' => 'form-control form-control-sm']);
     @endphp
 </div>
 {{-- Costo orario macchina --}}
@@ -44,7 +44,7 @@
 <div class="col-sm">
     @php
         echo Form::label('perc_resa', 'Percentuale resa', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
-        echo Form::number('perc_resa', null,['placeholder' => '85','autocomplete' => 'off','class' => 'form-control form-control-sm']);
+        echo Form::number('perc_resa', null,['step' => '0.01','placeholder' => '85','autocomplete' => 'off','class' => 'form-control form-control-sm']);
     @endphp
 </div>
 {{-- Tempo pezzo --}}
