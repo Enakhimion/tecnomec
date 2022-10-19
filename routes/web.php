@@ -38,6 +38,10 @@ Route::resource('clienti', \App\Http\Controllers\ClienteController::class)
 Route::resource('materiali', \App\Http\Controllers\MaterialeController::class)
     ->parameters(['materiali' => 'materiale']);
 
+//Route per la gestione delle categorie
+Route::resource('categorie', \App\Http\Controllers\CategoriaController::class)
+    ->parameters(['categorie' => 'categoria']);
+
 //Route per la gestione dei macchinari
 Route::resource('macchinari', \App\Http\Controllers\MacchinarioController::class)
     ->parameters(['macchinari' => 'macchinario']);

@@ -24,6 +24,8 @@
 
                 @include('materiali.create')
 
+                @include('categorie.create')
+
             </div>
         </div>
 
@@ -114,6 +116,7 @@
                             <tr>
                                 <td><a href="#" data-bs-toggle="modal" data-bs-target="#lavAltroCosto{{ $id }}">{{ $altri_costi['descrizione'] }}</a></td>
                                 <td>{{ $altri_costi['tipo'] }}</td>
+                                <td></td>
                                 <td></td>
                                 <td>{{ $altri_costi['importo'] }}</td>
                                 <td></td>

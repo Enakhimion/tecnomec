@@ -17,6 +17,7 @@ class Articolo extends Model
     protected $fillable = [
         'id_materiale',
         'id_cliente',
+        'id_categoria',
         'codice',
         'descrizione',
         'peso_articolo',
@@ -94,6 +95,14 @@ class Articolo extends Model
     public function materiale()
     {
         return $this->belongsTo(Materiale::class,'id_materiale');
+    }
+
+    /**
+     * Categoria dell'articolo
+     */
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class,'id_categoria');
     }
 
     /**  Relazione 1-N */

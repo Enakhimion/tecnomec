@@ -19,11 +19,11 @@
 
         @error('id_materiale')<div class="invalid-feedback">{{ $message  }}</div>@enderror
     </div>
-    {{-- Tipo --}}
+    {{-- Categoria --}}
     <div class="col-sm">
         @php
             echo Form::label('id_categoria', 'Categoria', ['class' => 'col-sm col-form-label col-form-label-sm']);
-            echo Form::text('id_categoria',null,['autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('id_categoria') ? ' is-invalid' : null)]);
+            echo Form::select('id_categoria', $categorie, null,['placeholder' => 'Seleziona','autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('id_categoria') ? ' is-invalid' : null)]);
         @endphp
 
         @error('id_categoria')<div class="invalid-feedback">{{ $message  }}</div>@enderror

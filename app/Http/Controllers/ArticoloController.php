@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AltroCosto;
 use App\Models\Articolo;
+use App\Models\Categoria;
 use App\Models\Cliente;
 use App\Models\Macchinario;
 use App\Models\Materiale;
@@ -40,6 +41,7 @@ class ArticoloController extends Controller
         $data = [
             'materiali' => Materiale::pluck('nome','id'),
             'clienti' => Cliente::pluck('nome','id'),
+            'categorie' => Categoria::pluck('descrizione','id'),
         ];
 
         return view('articoli.create', $data);
@@ -60,6 +62,7 @@ class ArticoloController extends Controller
         $validator = Validator::make(request()->all(),[
             'id_materiale' => ['required','numeric','exists:materiali,id'],
             'id_cliente' => ['required','numeric','exists:clienti,id'],
+            'id_categoria' => ['required','numeric','exists:categorie,id'],
             'codice' => ['required','max:80'],
             'descrizione' => ['required','max:80'],
             'peso_articolo' => ['required','numeric'],
@@ -78,6 +81,7 @@ class ArticoloController extends Controller
         $articolo = Articolo::create([
             'id_materiale' => $request->id_materiale,
             'id_cliente' => $request->id_cliente,
+            'id_categoria' => $request->id_categoria,
             'codice' => $request->codice,
             'descrizione' => $request->descrizione,
             'peso_articolo' => $request->peso_articolo,
@@ -400,6 +404,7 @@ class ArticoloController extends Controller
             'clienti' => Cliente::pluck('nome','id'),
             'tipologie' => TipologiaLavEsterna::pluck('descrizione','id'),
             'macchinari' => Macchinario::pluck('nome','id'),
+            'categorie' => Categoria::pluck('descrizione','id'),
             'costo' => $costo,
             'costo_materiale' => $costo_materiale,
             'elenco_interne'=> $elenco_interne,
@@ -425,6 +430,7 @@ class ArticoloController extends Controller
         $validator = Validator::make(request()->all(),[
             'id_materiale' => ['required','numeric','exists:materiali,id'],
             'id_cliente' => ['required','numeric','exists:clienti,id'],
+            'id_categoria' => ['required','numeric','exists:categorie,id'],
             'codice' => ['required','max:80'],
             'descrizione' => ['required','max:80'],
             'peso_articolo' => ['required','numeric'],
@@ -443,6 +449,7 @@ class ArticoloController extends Controller
         $articolo->update([
             'id_materiale' => $request->id_materiale,
             'id_cliente' => $request->id_cliente,
+            'id_categoria' => $request->id_categoria,
             'codice' => $request->codice,
             'descrizione' => $request->descrizione,
             'peso_articolo' => $request->peso_articolo,

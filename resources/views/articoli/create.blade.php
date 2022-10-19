@@ -37,6 +37,8 @@
 
                 @include('materiali.create')
 
+                @include('categorie.create')
+
             </div>
         </div>
     </div>

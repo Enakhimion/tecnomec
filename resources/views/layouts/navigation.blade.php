@@ -36,6 +36,11 @@
                         {{ __('Clienti') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('categorie.index')" :active="request()->routeIs('categorie.index')" target="_blank">
+                        {{ __('Categorie') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
