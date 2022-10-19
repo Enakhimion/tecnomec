@@ -124,4 +124,26 @@ class LavEsternaController extends Controller
 
         return back()->with('success','Lavorazione eliminata correttamente');
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\LavEsterna  $lavEsterna
+     * @return \Illuminate\Http\Response
+     */
+    public function soft_delete(Articolo $articolo,LavEsterna $lav_esterna)
+    {
+
+        if($lav_esterna->stato === 'S'){
+
+            $lav_esterna->update(['stato' => 'N']);
+            return back()->with('success','Lavorazione disattivata correttamente');
+
+        }else{
+
+            $lav_esterna->update(['stato' => 'S']);
+            return back()->with('success','Lavorazione attivata correttamente');
+
+        }
+    }
 }

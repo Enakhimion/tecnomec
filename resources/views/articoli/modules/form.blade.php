@@ -144,7 +144,7 @@
     <div class="col-sm">
         @php
             echo Form::label('lunghezza_tronchetto_totale', 'Lunghezza tronchetto totale mm', ['class' => 'col-sm col-form-label col-form-label-sm']);
-            echo Form::textarea('lunghezza_tronchetto_totale', null,['disabled','autocomplete' => 'off','class' => 'form-control form-control-sm']);
+            echo Form::text('lunghezza_tronchetto_totale', null,['disabled','autocomplete' => 'off','class' => 'form-control form-control-sm']);
         @endphp
     </div>
 
@@ -158,7 +158,7 @@
     <div class="col-sm">
         @php
             echo Form::label('descrizione', 'Descrizione', ['class' => 'col-sm col-form-label col-form-label-sm']);
-            echo Form::text('descrizione', null,['rows' => 3,'autocomplete' => 'off','class' => 'form-control form-control-sm']);
+            echo Form::textarea('descrizione', null,['rows' => 3,'autocomplete' => 'off','class' => 'form-control form-control-sm']);
         @endphp
 
         @error('descrizione')<div class="invalid-feedback">{{ $message  }}</div>@enderror

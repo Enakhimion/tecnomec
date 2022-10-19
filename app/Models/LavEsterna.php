@@ -18,7 +18,8 @@ class LavEsterna extends Model
         'id_articolo',
         'id_tipologia',
         'descrizione',
-        'importo'
+        'importo',
+        'stato'
     ];
 
     /**

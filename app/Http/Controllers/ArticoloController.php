@@ -142,6 +142,7 @@ class ArticoloController extends Controller
             $elenco_interne[$lavorazione_interna->id] = [
                 'descrizione' => $lavorazione_interna->descrizione,
                 'tempo_effettivo' => $lavorazione_interna->tempo_effettivo,
+                'stato' => $lavorazione_interna->stato === 'S' ? 'Attiva, clicca qui per disattivarla' : 'Disattivata, clicca qui per attivarla',
                 'tipo' => 'Lavorazione interna',
                 'delete' => route('lav_interne.destroy',[$articolo,$lavorazione_interna])
             ];
@@ -154,6 +155,7 @@ class ArticoloController extends Controller
 
             $elenco_esterne[$lavorazione_esterna->id] = [
                 'descrizione' => $lavorazione_esterna->descrizione,
+                'stato' => $lavorazione_esterna->stato === 'S' ? 'Attiva, clicca qui per disattivarla' : 'Disattivata, clicca qui per attivarla',
                 'tipo' => 'Lavorazione/Trattamento',
                 'delete' => route('lav_esterne.destroy',[$articolo,$lavorazione_esterna])
             ];
@@ -229,12 +231,14 @@ class ArticoloController extends Controller
                     //Costo totale senza ricarico
                     $tot = $costo_lavorazione + $costo_setup_qta + $costo_utensileria_qta + $costo_struttura_qta;
 
-                    if(isset($costo[$i]['lav_interne'])){
-
-                        $costo[$i]['lav_interne'] += $tot / 100 * $preventivo->ricarico_interne + $tot;
-                    }else{
-                        $costo[$i]['lav_interne'] = $tot / 100 * $preventivo->ricarico_interne + $tot;
+                    if($lavorazione_interna->stato === 'S'){
+                        if(isset($costo[$i]['lav_interne']) ){
+                            $costo[$i]['lav_interne'] += $tot / 100 * $preventivo->ricarico_interne + $tot;
+                        }else{
+                            $costo[$i]['lav_interne'] = $tot / 100 * $preventivo->ricarico_interne + $tot;
+                        }
                     }
+
 
                     //In base al numero decido che key dargli
                     switch ($i) {
@@ -283,10 +287,12 @@ class ArticoloController extends Controller
                             break;
                     }
 
-                    if(isset($costo[$i]['lav_esterne'])){
-                        $costo[$i]['lav_esterne'] += $costo_lavorazione_esterna / 100 * $preventivo->ricarico_esterne + $costo_lavorazione_esterna;
-                    }else{
-                        $costo[$i]['lav_esterne'] = $costo_lavorazione_esterna / 100 * $preventivo->ricarico_esterne + $costo_lavorazione_esterna;
+                    if($lavorazione_esterna->stato === 'S'){
+                        if(isset($costo[$i]['lav_esterne'])){
+                            $costo[$i]['lav_esterne'] += $costo_lavorazione_esterna / 100 * $preventivo->ricarico_esterne + $costo_lavorazione_esterna;
+                        }else{
+                            $costo[$i]['lav_esterne'] = $costo_lavorazione_esterna / 100 * $preventivo->ricarico_esterne + $costo_lavorazione_esterna;
+                        }
                     }
 
                     $elenco_esterne[$lavorazioni_esterne->id]['importo'] = $lavorazioni_esterne->importo;

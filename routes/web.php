@@ -46,9 +46,17 @@ Route::resource('macchinari', \App\Http\Controllers\MacchinarioController::class
 Route::resource('articoli.lav_esterne', \App\Http\Controllers\LavEsternaController::class, ['names' => 'lav_esterne'])
     ->parameters(['articoli' => 'articolo','lav_esterne' => 'lav_esterna']);
 
+//Lavorazioni esterne
+Route::get('articoli/{articolo}/lav_esterne/{lav_esterna}/soft_delete', [\App\Http\Controllers\LavEsternaController::class, 'soft_delete'])
+    ->name('lav_esterne_soft_delete');
+
 //Route per la gestione delle lavorazioni interne
 Route::resource('articoli.lav_interne', \App\Http\Controllers\LavInternaController::class, ['names' => 'lav_interne'])
     ->parameters(['articoli' => 'articolo','lav_interne' => 'lav_interna']);
+
+//Lavorazioni interne
+Route::get('articoli/{articolo}/lav_interne/{lavorazione_interna}/soft_delete', [\App\Http\Controllers\LavInternaController::class, 'soft_delete'])
+    ->name('lav_interne_soft_delete');
 
 //Route per la gestione degli altri costi
 Route::resource('articoli.altri_costi', \App\Http\Controllers\AltroCostoController::class, ['names' => 'altri_costi'])

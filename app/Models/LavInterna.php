@@ -23,7 +23,8 @@ class LavInterna extends Model
         'costo_orario_macchina',
         'minuti_setup',
         'perc_resa',
-        'tempo_pezzo'
+        'tempo_pezzo',
+        'stato'
     ];
 
     //Attributi al di fuori delle colonne del DB

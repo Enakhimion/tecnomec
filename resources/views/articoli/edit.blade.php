@@ -56,6 +56,7 @@
                         <tr>
                             <th scope="col">Descrizione</th>
                             <th scope="col">Tipo</th>
+                            <th scope="col">Stato</th>
                             <th scope="col">Tempo effettivo</th>
                             <th scope="col">Importo</th>
                             <th scope="col">QTA 1</th>
@@ -71,6 +72,7 @@
                             <tr>
                                 <td><a href="#" data-bs-toggle="modal" data-bs-target="#lavInterna{{ $id }}">{{ $interna['descrizione'] }}</a></td>
                                 <td>{{ $interna['tipo'] }}</td>
+                                <td><a href="{{ route('lav_interne_soft_delete',[$articolo,$id]) }}">{{ $interna['stato'] }}</a></td>
                                 <td>{{ round($interna['tempo_effettivo'], 2) }}</td>
                                 <td></td>
                                 <td>{{ isset($interna['qta1']) ? round($interna['qta1'], 4) : "-" }}</td>
@@ -91,6 +93,7 @@
                             <tr>
                                 <td><a href="#" data-bs-toggle="modal" data-bs-target="#lavEsterna{{ $id }}">{{ $esterna['descrizione'] }}</a></td>
                                 <td>{{ $esterna['tipo'] }}</td>
+                                <td><a href="{{ route('lav_esterne_soft_delete',[$articolo,$id]) }}">{{ $esterna['stato'] }}</a></td>
                                 <td></td>
                                 <td>{{ $esterna['importo'] }}</td>
                                 <td>{{ isset($esterna['qta1']) ? round($esterna['qta1'], 7) : "-"  }}</td>

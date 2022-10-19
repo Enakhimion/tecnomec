@@ -144,4 +144,26 @@ class LavInternaController extends Controller
 
         return back()->with('success', "Lavorazione interna eliminata correttamente");
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\LavEsterna  $lavEsterna
+     * @return \Illuminate\Http\Response
+     */
+    public function soft_delete(Articolo $articolo,LavInterna $lav_interna)
+    {
+
+        if($lav_interna->stato === 'S'){
+
+            $lav_interna->update(['stato' => 'N']);
+            return back()->with('success','Lavorazione disattivata correttamente');
+
+        }else{
+
+            $lav_interna->update(['stato' => 'S']);
+            return back()->with('success','Lavorazione attivata correttamente');
+
+        }
+    }
 }
