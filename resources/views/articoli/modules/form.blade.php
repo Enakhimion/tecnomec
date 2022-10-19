@@ -22,11 +22,11 @@
     {{-- Tipo --}}
     <div class="col-sm">
         @php
-            echo Form::label('descrizione', 'Categoria', ['class' => 'col-sm col-form-label col-form-label-sm']);
-            echo Form::text('descrizione',null,['autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('descrizione') ? ' is-invalid' : null)]);
+            echo Form::label('id_categoria', 'Categoria', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::text('id_categoria',null,['autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('id_categoria') ? ' is-invalid' : null)]);
         @endphp
 
-        @error('descrizione')<div class="invalid-feedback">{{ $message  }}</div>@enderror
+        @error('id_categoria')<div class="invalid-feedback">{{ $message  }}</div>@enderror
     </div>
     {{-- Codice --}}
     <div class="col-sm">
@@ -144,13 +144,24 @@
     <div class="col-sm">
         @php
             echo Form::label('lunghezza_tronchetto_totale', 'Lunghezza tronchetto totale mm', ['class' => 'col-sm col-form-label col-form-label-sm']);
-            echo Form::text('lunghezza_tronchetto_totale', null,['disabled','autocomplete' => 'off','class' => 'form-control form-control-sm']);
+            echo Form::textarea('lunghezza_tronchetto_totale', null,['disabled','autocomplete' => 'off','class' => 'form-control form-control-sm']);
         @endphp
     </div>
 
     <div class="col-sm">
     </div>
     <div class="col-sm">
+    </div>
+</div>
+
+<div class="form-group row mb-3 mt-3">
+    <div class="col-sm">
+        @php
+            echo Form::label('descrizione', 'Descrizione', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::text('descrizione', null,['rows' => 3,'autocomplete' => 'off','class' => 'form-control form-control-sm']);
+        @endphp
+
+        @error('descrizione')<div class="invalid-feedback">{{ $message  }}</div>@enderror
     </div>
 </div>
 

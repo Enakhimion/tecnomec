@@ -2,7 +2,7 @@
 <div class="col-3">
     <!-- Button trigger modal -->
     <a type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalLavEsterna">
-        Lavorazione esterna
+        Lavorazioni e trattamenti
     </a>
 </div>
 

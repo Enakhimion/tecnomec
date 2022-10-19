@@ -154,7 +154,7 @@ class ArticoloController extends Controller
 
             $elenco_esterne[$lavorazione_esterna->id] = [
                 'descrizione' => $lavorazione_esterna->descrizione,
-                'tipo' => 'Lavorazione esterna',
+                'tipo' => 'Lavorazione/Trattamento',
                 'delete' => route('lav_esterne.destroy',[$articolo,$lavorazione_esterna])
             ];
         }
@@ -288,7 +288,7 @@ class ArticoloController extends Controller
                     }else{
                         $costo[$i]['lav_esterne'] = $costo_lavorazione_esterna / 100 * $preventivo->ricarico_esterne + $costo_lavorazione_esterna;
                     }
-                    
+
                     $elenco_esterne[$lavorazioni_esterne->id]['importo'] = $lavorazioni_esterne->importo;
 
                     //In base al numero decido che key dargli
@@ -327,7 +327,7 @@ class ArticoloController extends Controller
                     }else{
                         $costo[$i]['altri_costi'] = $costo_altro / 100 * $preventivo->ricarico_esterne + $costo_altro;
                     }
-                    
+
                     $elenco_altri_costi[$altro_costo->id]['importo'] = $altro_costo->importo;
 
                     //In base al numero decido che key dargli
