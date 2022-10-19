@@ -161,7 +161,8 @@ class ArticoloController extends Controller
                 'descrizione' => $lavorazione_esterna->descrizione,
                 'stato' => $lavorazione_esterna->stato === 'S' ? 'Attiva, clicca qui per disattivarla' : 'Disattivata, clicca qui per attivarla',
                 'tipo' => 'Lavorazione/Trattamento',
-                'delete' => route('lav_esterne.destroy',[$articolo,$lavorazione_esterna])
+                'delete' => route('lav_esterne.destroy',[$articolo,$lavorazione_esterna]),
+                'importo'=> $lavorazione_esterna->importo
             ];
         }
 
@@ -173,7 +174,8 @@ class ArticoloController extends Controller
             $elenco_altri_costi[$altro_costo->id] = [
                 'descrizione' => $altro_costo->descrizione,
                 'tipo' => 'Altro costo',
-                'delete' => route('altri_costi.destroy',[$articolo,$altro_costo])
+                'delete' => route('altri_costi.destroy',[$articolo,$altro_costo]),
+                'importo' => $altro_costo->importo
             ];
         }
 
@@ -311,7 +313,7 @@ class ArticoloController extends Controller
                         }
                     }
 
-                    $elenco_esterne[$lavorazioni_esterne->id]['importo'] = $lavorazioni_esterne->importo;
+
 
                     //In base al numero decido che key dargli
                     switch ($i) {
@@ -350,7 +352,7 @@ class ArticoloController extends Controller
                         $costo[$i]['altri_costi'] = $costo_altro / 100 * $preventivo->ricarico_esterne + $costo_altro;
                     }
 
-                    $elenco_altri_costi[$altro_costo->id]['importo'] = $altro_costo->importo;
+
 
                     //In base al numero decido che key dargli
                     switch ($i) {
