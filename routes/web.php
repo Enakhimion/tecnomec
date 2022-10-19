@@ -55,7 +55,7 @@ Route::resource('articoli.lav_interne', \App\Http\Controllers\LavInternaControll
     ->parameters(['articoli' => 'articolo','lav_interne' => 'lav_interna']);
 
 //Lavorazioni interne
-Route::get('articoli/{articolo}/lav_interne/{lavorazione_interna}/soft_delete', [\App\Http\Controllers\LavInternaController::class, 'soft_delete'])
+Route::get('articoli/{articolo}/lav_interne/{lav_interna}/soft_delete', [\App\Http\Controllers\LavInternaController::class, 'soft_delete'])
     ->name('lav_interne_soft_delete');
 
 //Route per la gestione degli altri costi

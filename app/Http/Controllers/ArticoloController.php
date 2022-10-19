@@ -237,6 +237,12 @@ class ArticoloController extends Controller
                         }else{
                             $costo[$i]['lav_interne'] = $tot / 100 * $preventivo->ricarico_interne + $tot;
                         }
+                    }else{
+                        if(isset($costo[$i]['lav_interne']) ){
+                            $costo[$i]['lav_interne'] += 0;
+                        }else{
+                            $costo[$i]['lav_interne'] = 0;
+                        }
                     }
 
 
@@ -292,6 +298,12 @@ class ArticoloController extends Controller
                             $costo[$i]['lav_esterne'] += $costo_lavorazione_esterna / 100 * $preventivo->ricarico_esterne + $costo_lavorazione_esterna;
                         }else{
                             $costo[$i]['lav_esterne'] = $costo_lavorazione_esterna / 100 * $preventivo->ricarico_esterne + $costo_lavorazione_esterna;
+                        }
+                    }else{
+                        if(isset($costo[$i]['lav_esterne'])){
+                            $costo[$i]['lav_esterne'] += 0;
+                        }else{
+                            $costo[$i]['lav_esterne'] = 0;
                         }
                     }
 
