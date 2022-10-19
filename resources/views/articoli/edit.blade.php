@@ -97,7 +97,7 @@
                                 <td>{{ $esterna['tipo'] }}</td>
                                 <td><a href="{{ route('lav_esterne_soft_delete',[$articolo,$id]) }}">{{ $esterna['stato'] }}</a></td>
                                 <td></td>
-                                <td>{{ $esterna['importo'] }}</td>
+                                <td>{{ $esterna['importo']  ?? 0 }}</td>
                                 <td>{{ isset($esterna['qta1']) ? round($esterna['qta1'], 7) : "-"  }}</td>
                                 <td>{{ isset($esterna['qta2']) ? round($esterna['qta2'], 7) : "-"  }}</td>
                                 <td>{{ isset($esterna['qta3']) ? round($esterna['qta3'], 7) : "-"  }}</td>
@@ -118,7 +118,7 @@
                                 <td>{{ $altri_costi['tipo'] }}</td>
                                 <td></td>
                                 <td></td>
-                                <td>{{ $altri_costi['importo'] }}</td>
+                                <td>{{ $altri_costi['importo'] ?? 0  }}</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
