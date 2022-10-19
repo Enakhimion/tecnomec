@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="updateCategorie{{ $macchinario->id }}" tabindex="-1" aria-labelledby="updateCategorie" aria-hidden="true">
+<div class="modal fade" id="updateCategorie{{ $categoria->id }}" tabindex="-1" aria-labelledby="updateCategorie" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
