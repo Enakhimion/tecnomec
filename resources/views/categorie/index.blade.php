@@ -28,7 +28,7 @@
         const categorie = {!! $categorie !!};
 
         $(document).ready( function () {
-            $('#macchinari').DataTable( {
+            $('#categorie').DataTable( {
 
                 paging:         false,
                 info:           false,
