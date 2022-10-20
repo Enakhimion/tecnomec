@@ -19,6 +19,12 @@
                 {!! Form::submit('Aggiorna dati Articolo', ['class' => 'btn btn-primary']) !!}
 
                 {!! Form::close() !!}
+                
+                <form id="destroy-form" action="{{ route('articoli.destroy',[$articolo]) }}" method="POST" class="mt-5">
+                    @method('DELETE')
+                    {!! Form::submit('Elimina articolo', ['class' => 'btn btn-danger']) !!}
+                    @csrf
+                </form>
 
                 @include('clienti.create')
 
