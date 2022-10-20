@@ -26,7 +26,7 @@
 
     </head>
     <body class="font-sans antialiased">
-    <i class="fa-solid fa-thumbs-up fa-5x"></i>
+    <i class="fa-solid fa-check"></i>
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
