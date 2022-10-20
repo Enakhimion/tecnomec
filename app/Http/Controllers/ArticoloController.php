@@ -148,7 +148,7 @@ class ArticoloController extends Controller
             $elenco_interne[$lavorazione_interna->id] = [
                 'descrizione' => $lavorazione_interna->descrizione,
                 'tempo_effettivo' => $lavorazione_interna->tempo_effettivo,
-                'stato' => $lavorazione_interna->stato === 'S' ? '<i class="fa-solid fa-check" style="color: green"></i>' : '<i class="fa-solid fa-xmark" style="color: red"></i>></i>',
+                'stato' => $lavorazione_interna->stato === 'S' ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-solid fa-xmark"></i>',
                 'tipo' => 'Lavorazione interna',
                 'delete' => route('lav_interne.destroy',[$articolo,$lavorazione_interna])
             ];
