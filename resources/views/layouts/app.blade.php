@@ -18,6 +18,9 @@
         <!-- Datatable -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 
+        <!-- Icone fontawesome -->
+        <script src="https://kit.fontawesome.com/aae360f692.js" crossorigin="anonymous"></script>
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
