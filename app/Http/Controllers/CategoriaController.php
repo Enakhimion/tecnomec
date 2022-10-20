@@ -44,7 +44,7 @@ class CategoriaController extends Controller
 
         //Validazione dei campi presi in input
         $validator = Validator::make(request()->all(),[
-            'descrizione' => ['required','max:80']
+            'descrizione' => ['required','max:80','unique:categorie,descrizione']
         ]);
 
         //Validazione degli input
@@ -92,7 +92,7 @@ class CategoriaController extends Controller
 
         //Validazione dei campi presi in input
         $validator = Validator::make(request()->all(),[
-            'descrizione' => ['required','max:80']
+            'descrizione' => ['required','max:80','unique:categorie,descrizione']
         ]);
 
         //Validazione degli input
