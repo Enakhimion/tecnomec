@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Materiale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class MaterialeController extends Controller
 {
@@ -99,7 +100,9 @@ class MaterialeController extends Controller
 
         //Validazione dei campi presi in input
         $validator = Validator::make(request()->all(),[
-            'nome' => ['required','max:250','unique:materiali,nome'],
+            'nome' => ['required','max:250',Rule::unique('materiali')->where(function ($query) use ($materiale) {
+                return $query->where('id','!=', $materiale->id);
+            })],
             'peso' => ['required','numeric'],
             'base' => ['required','numeric'],
             'extra' => ['required','numeric'],

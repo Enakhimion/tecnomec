@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ClienteController extends Controller
 {
@@ -45,7 +46,7 @@ class ClienteController extends Controller
         //Validazione dei campi presi in input
         $validator = Validator::make(request()->all(),[
             'nome' => ['required','max:250','unique:clienti,nome'],
-            'desinenza' => ['required','max:250'],
+            'desinenza' => ['required','max:250','unique:clienti,desinenza'],
         ]);
 
         //Validazione degli input
@@ -94,8 +95,12 @@ class ClienteController extends Controller
 
         //Validazione dei campi presi in input
         $validator = Validator::make(request()->all(),[
-            'nome' => ['required','max:250','unique:clienti,nome'],
-            'desinenza' => ['required','max:250'],
+            'nome' => ['required','max:250',Rule::unique('clienti')->where(function ($query) use ($cliente) {
+                return $query->where('id','!=', $cliente->id);
+            })],
+            'desinenza' => ['required',Rule::unique('clienti')->where(function ($query) use ($cliente) {
+                return $query->where('id','!=', $cliente->id);
+            })],
         ]);
 
         //Validazione degli input
