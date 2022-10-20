@@ -80,7 +80,15 @@
                             <tr>
                                 <td><a href="#" data-bs-toggle="modal" data-bs-target="#lavInterna{{ $id }}">{{ $interna['descrizione'] }}</a></td>
                                 <td>{{ $interna['tipo'] }}</td>
-                                <td><a href="{{ route('lav_interne_soft_delete',[$articolo,$id]) }}"><i class="fa-solid fa-check"></i>{{ $interna['stato'] }}</a></td>
+                                <td>
+                                    <a href="{{ route('lav_interne_soft_delete',[$articolo,$id]) }}"><i class="fa-solid fa-check"></i>
+                                        @if($interna['stato'] === 'S')
+                                            <i class="fa-solid fa-check" style="color: green"></i>
+                                        @else
+                                            <i class="fa-solid fa-circle-xmark" style="color: red"></i>
+                                        @endif
+                                    </a>
+                                </td>
                                 <td>{{ round($interna['tempo_effettivo'], 2) }}</td>
                                 <td></td>
                                 <td>{{ isset($interna['qta1']) ? round($interna['qta1'], 4) : "-" }}</td>
@@ -101,7 +109,15 @@
                             <tr>
                                 <td><a href="#" data-bs-toggle="modal" data-bs-target="#lavEsterna{{ $id }}">{{ $esterna['descrizione'] }}</a></td>
                                 <td>{{ $esterna['tipo'] }}</td>
-                                <td><a href="{{ route('lav_esterne_soft_delete',[$articolo,$id]) }}"><i class="fa-solid fa-check"></i>{{ $esterna['stato'] }}</a></td>
+                                <td>
+                                    <a href="{{ route('lav_esterne_soft_delete',[$articolo,$id]) }}">
+                                        @if($esterna['stato'] === 'S')
+                                            <i class="fa-solid fa-check" style="color: green"></i>
+                                        @else
+                                            <i class="fa-solid fa-circle-xmark" style="color: red"></i>
+                                        @endif
+                                    </a>
+                                </td>
                                 <td></td>
                                 <td>{{ $esterna['importo']  ?? 0 }}</td>
                                 <td>{{ isset($esterna['qta1']) ? number_format(round($esterna['qta1'], 5),5) : "-"  }}</td>
