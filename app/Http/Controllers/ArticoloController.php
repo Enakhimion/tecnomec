@@ -293,7 +293,7 @@ class ArticoloController extends Controller
                             break;
                         //Al KG
                         case 2:
-                            $costo_lavorazione_esterna = $lavorazioni_esterne->importo / 1000 * $articolo->peso_articolo;
+                            $costo_lavorazione_esterna = $lavorazioni_esterne->importo * $articolo->peso_articolo;
                             break;
                         //Singolo pezzo
                         case 3:
