@@ -81,7 +81,7 @@
                                 <td><a href="#" data-bs-toggle="modal" data-bs-target="#lavInterna{{ $id }}">{{ $interna['descrizione'] }}</a></td>
                                 <td>{{ $interna['tipo'] }}</td>
                                 <td>
-                                    <a href="{{ route('lav_interne_soft_delete',[$articolo,$id]) }}"><i class="fa-solid fa-check"></i>
+                                    <a href="{{ route('lav_interne_soft_delete',[$articolo,$id]) }}">
                                         @if($interna['stato'] === 'S')
                                             <i class="fa-solid fa-check" style="color: green"></i>
                                         @else
