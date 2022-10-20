@@ -18,13 +18,15 @@
         <!-- Datatable -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
         <!-- Icone fontawesome -->
         <script src="https://kit.fontawesome.com/aae360f692.js" crossorigin="anonymous"></script>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
+    <i class="fa-solid fa-thumbs-up fa-5x"></i>
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
