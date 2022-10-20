@@ -495,7 +495,7 @@ class ArticoloController extends Controller
 
         $articolo->delete();
         
-        return back()->with('success', 'Articolo eliminato correttamente');
+        return redirect()->route('dashboard');
         
     }
 }
