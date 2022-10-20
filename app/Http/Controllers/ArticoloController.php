@@ -475,6 +475,27 @@ class ArticoloController extends Controller
      */
     public function destroy(Articolo $articolo)
     {
-        //
+        
+        //Elimino tutti gli oggetti collegati all'articolo
+        foreach($articolo->lav_interne as $lav_interna){
+            $lav_interna->delete();
+        }
+        
+        foreach($articolo->lav_esterne as $lav_esterna){
+            $lav_esterna->delete();
+        }
+        
+        foreach($articolo->altri_costi as $altro_costo){
+            $altro_costo->delete();
+        }
+        
+        foreach($articolo->preventivi as $preventivo){
+            $preventivo->delete();
+        }
+
+        $articolo->delete();
+        
+        return back()->with('success', 'Articolo eliminato correttamente');
+        
     }
 }
