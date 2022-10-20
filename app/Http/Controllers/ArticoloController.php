@@ -63,7 +63,7 @@ class ArticoloController extends Controller
             'id_materiale' => ['required','numeric','exists:materiali,id'],
             'id_cliente' => ['required','numeric','exists:clienti,id'],
             'id_categoria' => ['required','numeric','exists:categorie,id'],
-            'codice' => ['required','max:80',,Rule::unique('articoli')->where(function ($query) use ($request) {
+            'codice' => ['required','max:80',Rule::unique('articoli')->where(function ($query) use ($request) {
                 return $query->where('id_cliente', $request->id_cliente);
             })],
             'descrizione' => ['required','max:80'],
@@ -435,7 +435,7 @@ class ArticoloController extends Controller
             'id_materiale' => ['required','numeric','exists:materiali,id'],
             'id_cliente' => ['required','numeric','exists:clienti,id'],
             'id_categoria' => ['required','numeric','exists:categorie,id'],
-            'codice' => ['required','max:80',,Rule::unique('articoli')->where(function ($query) use ($request) {
+            'codice' => ['required','max:80',Rule::unique('articoli')->where(function ($query) use ($request) {
                 return $query->where('id_cliente', $request->id_cliente);
             })],
             'descrizione' => ['required','max:80'],
