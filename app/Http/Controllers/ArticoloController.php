@@ -436,7 +436,7 @@ class ArticoloController extends Controller
             'id_cliente' => ['required','numeric','exists:clienti,id'],
             'id_categoria' => ['required','numeric','exists:categorie,id'],
             'codice' => ['required','max:80',Rule::unique('articoli')->where(function ($query) use ($request, $articolo) {
-                return $query->where('id_cliente', $request->id_cliente)->where('id',$articolo->id);
+                return $query->where('id_cliente', $request->id_cliente)->where('id','!=',$articolo->id);
             })],
             'descrizione' => ['required','max:80'],
             'peso_articolo' => ['required','numeric'],
