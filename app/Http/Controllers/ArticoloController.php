@@ -161,7 +161,7 @@ class ArticoloController extends Controller
 
             $elenco_esterne[$lavorazione_esterna->id] = [
                 'descrizione' => $lavorazione_esterna->descrizione,
-                'stato' => $lavorazione_esterna->stato === 'S' ? 'Attiva, clicca qui per disattivarla' : 'Disattivata, clicca qui per attivarla',
+                'stato' => $lavorazione_esterna->stato,
                 'tipo' => 'Lavorazione/Trattamento',
                 'delete' => route('lav_esterne.destroy',[$articolo,$lavorazione_esterna]),
                 'importo'=> $lavorazione_esterna->importo
