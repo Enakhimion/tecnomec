@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class CategoriaController extends Controller
 {
@@ -92,7 +93,9 @@ class CategoriaController extends Controller
 
         //Validazione dei campi presi in input
         $validator = Validator::make(request()->all(),[
-            'descrizione' => ['required','max:80','unique:categorie,descrizione']
+            'descrizione' => ['required','max:80',Rule::unique('categorie')->where(function ($query) use ($categoria) {
+                return $query->where('id','!=', $categoria->id);
+            })],
         ]);
 
         //Validazione degli input
