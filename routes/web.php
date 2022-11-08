@@ -46,6 +46,14 @@ Route::resource('categorie', \App\Http\Controllers\CategoriaController::class)
 Route::resource('macchinari', \App\Http\Controllers\MacchinarioController::class)
     ->parameters(['macchinari' => 'macchinario']);
 
+//Route per la gestione dei domini lavorazioni interne
+Route::resource('domini_lav_interne', \App\Http\Controllers\DominioLavInternaController::class)
+    ->parameters(['domini_lav_interne' => 'dominio_lav_interna']);
+
+//Route per la gestione dei domini lavorazioni esterne
+Route::resource('domini_lav_esterne', \App\Http\Controllers\DominioLavEsternaController::class)
+    ->parameters(['domini_lav_esterne' => 'dominio_lav_esterna']);
+
 //Route per la gestione delle lavorazioni esterne
 Route::resource('articoli.lav_esterne', \App\Http\Controllers\LavEsternaController::class, ['names' => 'lav_esterne'])
     ->parameters(['articoli' => 'articolo','lav_esterne' => 'lav_esterna']);

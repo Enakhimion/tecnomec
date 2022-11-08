@@ -41,6 +41,16 @@
                         {{ __('Categorie') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('domini_lav_interne.index')" :active="request()->routeIs('domini_lav_interne.index')" target="_blank">
+                        {{ __('Descrizione lav interne') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('domini_lav_esterne.index')" :active="request()->routeIs('domini_lav_esterne.index')" target="_blank">
+                        {{ __('Descrizione lav esterne') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
