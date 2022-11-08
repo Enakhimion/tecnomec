@@ -1,8 +1,8 @@
 {{-- Descrizione --}}
 <div class="col-sm">
     @php
-        echo Form::label('descrizione', 'Descrizione', ['class' => 'col-sm col-form-label col-form-label-sm']);
-        echo Form::text('descrizione', null,['autocomplete' => 'off','class' => 'form-control form-control-sm']);
+        echo Form::label('id_dominio_lav_esterna', 'Descrizione', ['class' => 'col-sm col-form-label col-form-label-sm']);
+        echo Form::select('id_dominio_lav_esterna', $domini_lav_esterne,null,['placeholder' => 'seleziona','autocomplete' => 'off','class' => 'form-control form-control-sm']);
     @endphp
 </div>
 {{-- Tipologia --}}

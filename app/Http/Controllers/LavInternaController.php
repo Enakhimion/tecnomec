@@ -42,7 +42,7 @@ class LavInternaController extends Controller
         //Validazione dei campi presi in input
         $validator = Validator::make(request()->all(),[
             'id_macchinario' => ['required','numeric','exists:macchinari,id'],
-            'descrizione' => ['required','max:80'],
+            'id_dominio_lav_interna' => ['required','numeric','exists:domini_lav_interne,id'],
             'costo_utensileria' => ['required','numeric'],
             'costo_setup' => ['nullable','numeric'],
             'costo_orario_macchina' => ['nullable','numeric'],
@@ -57,7 +57,7 @@ class LavInternaController extends Controller
         LavInterna::create([
             'id_articolo' => $articolo->id,
             'id_macchinario' => $request->id_macchinario,
-            'descrizione' => $request->descrizione,
+            'id_dominio_lav_interna' => $request->id_dominio_lav_interna,
             'costo_utensileria' => $request->costo_utensileria,
             'costo_setup' => $request->costo_setup,
             'costo_orario_macchina' => $request->costo_orario_macchina,
@@ -105,6 +105,7 @@ class LavInternaController extends Controller
         //Validazione dei campi presi in input
         $validator = Validator::make(request()->all(),[
             'id_macchinario' => ['required','numeric','exists:macchinari,id'],
+            'id_dominio_lav_interna' => ['required','numeric','exists:domini_lav_interne,id'],
             'descrizione' => ['required','max:80'],
             'costo_utensileria' => ['required','numeric'],
             'costo_setup' => ['nullable','numeric'],
@@ -120,7 +121,7 @@ class LavInternaController extends Controller
         $lav_interna->update([
             'id_articolo' => $articolo->id,
             'id_macchinario' => $request->id_macchinario,
-            'descrizione' => $request->descrizione,
+            'id_dominio_lav_interna' => $request->id_dominio_lav_interna,
             'costo_utensileria' => $request->costo_utensileria,
             'costo_setup' => $request->costo_setup,
             'costo_orario_macchina' => $request->costo_orario_macchina,

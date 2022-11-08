@@ -16,6 +16,7 @@ class LavEsterna extends Model
 
     protected $fillable = [
         'id_articolo',
+        'id_dominio_lav_esterna',
         'id_tipologia',
         'descrizione',
         'importo',
@@ -36,5 +37,13 @@ class LavEsterna extends Model
     public function articolo()
     {
         return $this->belongsTo(Articolo::class,'id_articolo');
+    }
+
+    /**
+     * Dominio
+     */
+    public function dominio()
+    {
+        return $this->belongsTo(DominioLavEsterna::class,'id_dominio_lav_esterna');
     }
 }

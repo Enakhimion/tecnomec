@@ -42,7 +42,7 @@ class LavEsternaController extends Controller
         //Validazione dei campi presi in input
         $validator = Validator::make(request()->all(),[
             'id_tipologia' => ['required','numeric','exists:tipologie_lav_esterne,id'],
-            'descrizione' => ['required','max:80'],
+            'id_dominio_lav_esterna' => ['required','numeric','exists:domini_lav_esterne,id'],
             'importo' => ['required','numeric'],
         ]);
 
@@ -52,7 +52,7 @@ class LavEsternaController extends Controller
         LavEsterna::create([
             'id_articolo' => $articolo->id,
             'id_tipologia' => $request->id_tipologia,
-            'descrizione' => $request->descrizione,
+            'id_dominio_lav_esterna' => $request->id_dominio_lav_esterna,
             'importo' => $request->importo
         ]);
 
@@ -95,7 +95,7 @@ class LavEsternaController extends Controller
         //Validazione dei campi presi in input
         $validator = Validator::make(request()->all(),[
             'id_tipologia' => ['required','numeric','exists:tipologie_lav_esterne,id'],
-            'descrizione' => ['required','max:80'],
+            'id_dominio_lav_esterna' => ['required','numeric','exists:domini_lav_esterne,id'],
             'importo' => ['required','numeric'],
         ]);
 
@@ -105,7 +105,7 @@ class LavEsternaController extends Controller
         $lav_esterna->update([
             'id_articolo' => $articolo->id,
             'id_tipologia' => $request->id_tipologia,
-            'descrizione' => $request->descrizione,
+            'id_dominio_lav_esterna' => $request->id_dominio_lav_esterna,
             'importo' => $request->importo
         ]);
 

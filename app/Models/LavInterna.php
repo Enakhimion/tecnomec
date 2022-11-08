@@ -16,6 +16,7 @@ class LavInterna extends Model
 
     protected $fillable = [
         'id_articolo',
+        'id_dominio_lav_interna',
         'id_macchinario',
         'descrizione',
         'costo_utensileria',
@@ -55,5 +56,13 @@ class LavInterna extends Model
     public function articolo()
     {
         return $this->belongsTo(Articolo::class,'id_articolo');
+    }
+
+    /**
+     * Dominio
+     */
+    public function dominio()
+    {
+        return $this->belongsTo(DominioLavInterna::class,'id_dominio_lav_interna');
     }
 }

@@ -6,6 +6,8 @@ use App\Models\AltroCosto;
 use App\Models\Articolo;
 use App\Models\Categoria;
 use App\Models\Cliente;
+use App\Models\DominioLavEsterna;
+use App\Models\DominioLavInterna;
 use App\Models\Macchinario;
 use App\Models\Materiale;
 use App\Models\Preventivo;
@@ -146,8 +148,15 @@ class ArticoloController extends Controller
 
         foreach ($articolo->lav_interne as $lavorazione_interna){
 
+
+            $descrizione = $lavorazione_interna->descrizione;
+
+            if($lavorazione_interna->id_dominio_lav_interna !== null){
+                $descrizione = $lavorazione_interna->dominio->descrizione;
+            }
+
             $elenco_interne[$lavorazione_interna->id] = [
-                'descrizione' => $lavorazione_interna->descrizione,
+                'descrizione' => $descrizione,
                 'tempo_effettivo' => $lavorazione_interna->tempo_effettivo,
                 'tempo_pezzo' => $lavorazione_interna->tempo_pezzo,
                 'stato' => $lavorazione_interna->stato,
@@ -161,8 +170,14 @@ class ArticoloController extends Controller
 
         foreach ($articolo->lav_esterne as $lavorazione_esterna){
 
+            $descrizione = $lavorazione_esterna->descrizione;
+
+            if($lavorazione_esterna->id_dominio_lav_esterna !== null){
+                $descrizione = $lavorazione_esterna->dominio->descrizione;
+            }
+
             $elenco_esterne[$lavorazione_esterna->id] = [
-                'descrizione' => $lavorazione_esterna->descrizione,
+                'descrizione' => $descrizione,
                 'stato' => $lavorazione_esterna->stato,
                 'tipo' => 'Lavorazione/Trattamento',
                 'delete' => route('lav_esterne.destroy',[$articolo,$lavorazione_esterna]),
@@ -411,6 +426,8 @@ class ArticoloController extends Controller
             'tipologie' => TipologiaLavEsterna::orderBy('descrizione')->pluck('descrizione','id'),
             'macchinari' => Macchinario::orderBy('nome')->pluck('nome','id'),
             'categorie' => Categoria::orderBy('descrizione')->pluck('descrizione','id'),
+            'domini_lav_esterne' => DominioLavEsterna::pluck('descrizione','id'),
+            'domini_lav_interne' => DominioLavInterna::pluck('descrizione','id'),
             'costo' => $costo,
             'costo_materiale' => $costo_materiale,
             'elenco_interne'=> $elenco_interne,
