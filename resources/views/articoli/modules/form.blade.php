@@ -158,7 +158,7 @@
     <div class="col-sm">
         @php
             echo Form::label('descrizione', 'Descrizione', ['class' => 'col-sm col-form-label col-form-label-sm']);
-            echo Form::textarea('descrizione', null,['rows' => 3,'autocomplete' => 'off','class' => 'form-control form-control-sm']);
+            echo Form::textarea('descrizione', null,['rows' => 1,'autocomplete' => 'off','class' => 'form-control form-control-sm' . ($errors->has('descrizione') ? ' is-invalid' : null)]);
         @endphp
 
         @error('descrizione')<div class="invalid-feedback">{{ $message  }}</div>@enderror

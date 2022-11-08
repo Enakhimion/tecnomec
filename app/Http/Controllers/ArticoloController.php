@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -39,9 +40,9 @@ class ArticoloController extends Controller
     {
 
         $data = [
-            'materiali' => Materiale::pluck('nome','id'),
-            'clienti' => Cliente::pluck('nome','id'),
-            'categorie' => Categoria::pluck('descrizione','id'),
+            'materiali' => Materiale::select(DB::raw("CONCAT(nome,' base: ', IFNULL(base,0) ,' extra: ', IFNULL(extra,0)) AS nome"),'id')->orderBy('nome')->get()->pluck('nome','id'),
+            'clienti' => Cliente::orderBy('nome')->pluck('nome','id'),
+            'categorie' => Categoria::orderBy('descrizione')->pluck('descrizione','id'),
         ];
 
         return view('articoli.create', $data);
@@ -148,6 +149,7 @@ class ArticoloController extends Controller
             $elenco_interne[$lavorazione_interna->id] = [
                 'descrizione' => $lavorazione_interna->descrizione,
                 'tempo_effettivo' => $lavorazione_interna->tempo_effettivo,
+                'tempo_pezzo' => $lavorazione_interna->tempo_pezzo,
                 'stato' => $lavorazione_interna->stato,
                 'tipo' => 'Lavorazione interna',
                 'delete' => route('lav_interne.destroy',[$articolo,$lavorazione_interna])
@@ -161,7 +163,7 @@ class ArticoloController extends Controller
 
             $elenco_esterne[$lavorazione_esterna->id] = [
                 'descrizione' => $lavorazione_esterna->descrizione,
-                'stato' => $lavorazione_esterna->stato === 'S' ? 'Attiva, clicca qui per disattivarla' : 'Disattivata, clicca qui per attivarla',
+                'stato' => $lavorazione_esterna->stato,
                 'tipo' => 'Lavorazione/Trattamento',
                 'delete' => route('lav_esterne.destroy',[$articolo,$lavorazione_esterna]),
                 'importo'=> $lavorazione_esterna->importo
@@ -404,11 +406,11 @@ class ArticoloController extends Controller
 
         $data = [
             'articolo' => $articolo,
-            'materiali' => Materiale::pluck('nome','id'),
-            'clienti' => Cliente::pluck('nome','id'),
-            'tipologie' => TipologiaLavEsterna::pluck('descrizione','id'),
-            'macchinari' => Macchinario::pluck('nome','id'),
-            'categorie' => Categoria::pluck('descrizione','id'),
+            'materiali' => Materiale::select(DB::raw("CONCAT(nome,' base: ', IFNULL(base,0) ,' extra: ', IFNULL(extra,0)) AS nome"),'id')->orderBy('nome')->get()->pluck('nome','id'),
+            'clienti' => Cliente::orderBy('nome')->pluck('nome','id'),
+            'tipologie' => TipologiaLavEsterna::orderBy('descrizione')->pluck('descrizione','id'),
+            'macchinari' => Macchinario::orderBy('nome')->pluck('nome','id'),
+            'categorie' => Categoria::orderBy('descrizione')->pluck('descrizione','id'),
             'costo' => $costo,
             'costo_materiale' => $costo_materiale,
             'elenco_interne'=> $elenco_interne,
@@ -435,8 +437,8 @@ class ArticoloController extends Controller
             'id_materiale' => ['required','numeric','exists:materiali,id'],
             'id_cliente' => ['required','numeric','exists:clienti,id'],
             'id_categoria' => ['required','numeric','exists:categorie,id'],
-            'codice' => ['required','max:80',Rule::unique('articoli')->where(function ($query) use ($request) {
-                return $query->where('id_cliente', $request->id_cliente);
+            'codice' => ['required','max:80',Rule::unique('articoli')->where(function ($query) use ($request, $articolo) {
+                return $query->where('id_cliente', $request->id_cliente)->where('id','!=',$articolo->id);
             })],
             'descrizione' => ['required','max:80'],
             'peso_articolo' => ['required','numeric'],

@@ -36,8 +36,8 @@
 {{-- Minuti setup --}}
 <div class="col-sm">
     @php
-        echo Form::label('minuti_setup', 'Minuti setup', ['class' => 'col-sm col-form-label col-form-label-sm']);
-        echo Form::number('minuti_setup', null,['autocomplete' => 'off','class' => 'form-control form-control-sm']);
+        echo Form::label('minuti_setup', 'Minuti setup', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
+        echo Form::number('minuti_setup', 120,['autocomplete' => 'off','class' => 'form-control form-control-sm']);
     @endphp
 </div>
 {{-- Percentuale resa --}}
