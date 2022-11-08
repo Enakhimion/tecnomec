@@ -149,6 +149,7 @@ class ArticoloController extends Controller
             $elenco_interne[$lavorazione_interna->id] = [
                 'descrizione' => $lavorazione_interna->descrizione,
                 'tempo_effettivo' => $lavorazione_interna->tempo_effettivo,
+                'tempo_pezzo' => $lavorazione_interna->tempo_pezzo,
                 'stato' => $lavorazione_interna->stato,
                 'tipo' => 'Lavorazione interna',
                 'delete' => route('lav_interne.destroy',[$articolo,$lavorazione_interna])

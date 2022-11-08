@@ -65,6 +65,7 @@
                             <th scope="col">Descrizione</th>
                             <th scope="col">Tipo</th>
                             <th scope="col">Stato</th>
+                            <th scope="col">Tempo pezzo</th>
                             <th scope="col">Tempo effettivo</th>
                             <th scope="col">Importo</th>
                             <th scope="col">QTA 1</th>
@@ -89,6 +90,7 @@
                                         @endif
                                     </a>
                                 </td>
+                                <td>{{ round($interna['tempo_pezzo'], 2) }}</td>
                                 <td>{{ round($interna['tempo_effettivo'], 2) }}</td>
                                 <td></td>
                                 <td>{{ isset($interna['qta1']) ? round($interna['qta1'], 4) : "-" }}</td>
@@ -119,6 +121,7 @@
                                     </a>
                                 </td>
                                 <td></td>
+                                <td></td>
                                 <td>{{ $esterna['importo']  ?? 0 }}</td>
                                 <td>{{ isset($esterna['qta1']) ? number_format(round($esterna['qta1'], 5),5) : "-"  }}</td>
                                 <td>{{ isset($esterna['qta2']) ? number_format(round($esterna['qta2'], 5),5) : "-"  }}</td>
@@ -138,6 +141,7 @@
                             <tr>
                                 <td><a href="#" data-bs-toggle="modal" data-bs-target="#lavAltroCosto{{ $id }}">{{ $altri_costi['descrizione'] }}</a></td>
                                 <td>{{ $altri_costi['tipo'] }}</td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td>{{ $altri_costi['importo'] ?? 0  }}</td>
