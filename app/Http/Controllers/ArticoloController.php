@@ -404,7 +404,7 @@ class ArticoloController extends Controller
 
         $data = [
             'articolo' => $articolo,
-            'materiali' => Materiale::select(DB::raw("CONCAT(nome,' - b',base,' - e',extra) AS nome"))->orderBy('nome')->pluck('nome','id'),
+            'materiali' => Materiale::select(DB::raw("CONCAT(nome,' - b',base,' - e',extra) AS nome"))->orderBy('nome')->get()->pluck('nome','id'),
             'clienti' => Cliente::orderBy('nome')->pluck('nome','id'),
             'tipologie' => TipologiaLavEsterna::orderBy('descrizione')->pluck('descrizione','id'),
             'macchinari' => Macchinario::orderBy('nome')->pluck('nome','id'),
