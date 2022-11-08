@@ -22,7 +22,7 @@
     {{-- Categoria --}}
     <div class="col-sm">
         @php
-            echo Form::label('id_categoria', 'Categoria', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::label('id_categoria', 'Categoria <b>*</b>', ['class' => 'col-sm col-form-label col-form-label-sm']);
             echo Form::select('id_categoria', $categorie, null,['placeholder' => 'Seleziona','autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('id_categoria') ? ' is-invalid' : null)]);
         @endphp
 
