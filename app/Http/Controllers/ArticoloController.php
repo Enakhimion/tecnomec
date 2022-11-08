@@ -39,7 +39,7 @@ class ArticoloController extends Controller
     {
 
         $data = [
-            'materiali' => Materiale::orderBy('nome')->pluck('nome','id'),
+            'materiali' => Materiale::select(DB::raw("CONCAT(nome,' - b',base,' - e',extra) AS nome"))->orderBy('nome')->pluck('nome','id'),
             'clienti' => Cliente::orderBy('nome')->pluck('nome','id'),
             'categorie' => Categoria::orderBy('descrizione')->pluck('descrizione','id'),
         ];
@@ -404,7 +404,7 @@ class ArticoloController extends Controller
 
         $data = [
             'articolo' => $articolo,
-            'materiali' => Materiale::orderBy('nome')->pluck('nome','id'),
+            'materiali' => Materiale::select(DB::raw("CONCAT(nome,' - b',base,' - e',extra) AS nome"))->orderBy('nome')->pluck('nome','id'),
             'clienti' => Cliente::orderBy('nome')->pluck('nome','id'),
             'tipologie' => TipologiaLavEsterna::orderBy('descrizione')->pluck('descrizione','id'),
             'macchinari' => Macchinario::orderBy('nome')->pluck('nome','id'),
