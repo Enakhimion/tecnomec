@@ -39,9 +39,9 @@ class ArticoloController extends Controller
     {
 
         $data = [
-            'materiali' => Materiale::pluck('nome','id'),
-            'clienti' => Cliente::pluck('nome','id'),
-            'categorie' => Categoria::pluck('descrizione','id'),
+            'materiali' => Materiale::orderBy('nome')->pluck('nome','id'),
+            'clienti' => Cliente::orderBy('nome')->pluck('nome','id'),
+            'categorie' => Categoria::orderBy('descrizione')->pluck('descrizione','id'),
         ];
 
         return view('articoli.create', $data);
@@ -404,11 +404,11 @@ class ArticoloController extends Controller
 
         $data = [
             'articolo' => $articolo,
-            'materiali' => Materiale::pluck('nome','id'),
+            'materiali' => Materiale::orderBy('nome')->pluck('nome','id'),
             'clienti' => Cliente::orderBy('nome')->pluck('nome','id'),
-            'tipologie' => TipologiaLavEsterna::pluck('descrizione','id'),
-            'macchinari' => Macchinario::pluck('nome','id'),
-            'categorie' => Categoria::pluck('descrizione','id'),
+            'tipologie' => TipologiaLavEsterna::orderBy('descrizione')->pluck('descrizione','id'),
+            'macchinari' => Macchinario::orderBy('nome')->pluck('nome','id'),
+            'categorie' => Categoria::orderBy('descrizione')->pluck('descrizione','id'),
             'costo' => $costo,
             'costo_materiale' => $costo_materiale,
             'elenco_interne'=> $elenco_interne,
