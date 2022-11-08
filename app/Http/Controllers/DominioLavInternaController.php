@@ -93,7 +93,7 @@ class DominioLavInternaController extends Controller
 
         //Validazione dei campi presi in input
         $validator = Validator::make(request()->all(),[
-            'nome' => ['required','max:250',Rule::unique('domini_lav_interne')->where(function ($query) use ($dominioLavInterna) {
+            'descrizione' => ['required','max:250',Rule::unique('domini_lav_interne')->where(function ($query) use ($dominioLavInterna) {
                 return $query->where('id','!=', $dominioLavInterna->id);
             })]
         ]);
