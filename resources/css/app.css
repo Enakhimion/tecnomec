@@ -6,3 +6,7 @@
 .default-text{
     color: blue;
 }
+
+.danger-text{
+    color: red;
+}

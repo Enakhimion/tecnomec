@@ -424,7 +424,7 @@ class ArticoloController extends Controller
             'materiali' => Materiale::select(DB::raw("CONCAT(nome,' base: ', IFNULL(base,0) ,' extra: ', IFNULL(extra,0)) AS nome"),'id')->orderBy('nome')->get()->pluck('nome','id'),
             'clienti' => Cliente::orderBy('nome')->pluck('nome','id'),
             'tipologie' => TipologiaLavEsterna::orderBy('descrizione')->pluck('descrizione','id'),
-            'macchinari' => Macchinario::orderBy('nome')->pluck('nome','id'),
+            'macchinari' => Macchinario::select(DB::raw("CONCAT(nome,' costo orario: ', IFNULL(costo_orario_macchina,0) ,' costo setup: ', IFNULL(costo_orario_setup,0)) AS nome"),'id')->orderBy('nome')->get()->pluck('nome','id'),
             'categorie' => Categoria::orderBy('descrizione')->pluck('descrizione','id'),
             'domini_lav_esterne' => DominioLavEsterna::pluck('descrizione','id'),
             'domini_lav_interne' => DominioLavInterna::pluck('descrizione','id'),

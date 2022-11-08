@@ -4,7 +4,7 @@
     {{-- Cliente --}}
     <div class="col-sm">
         @php
-            echo Form::label('id_cliente', 'Cliente', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::label('id_cliente', 'Cliente', ['class' => 'danger-text col-sm col-form-label col-form-label-sm']);
             echo Form::select('id_cliente', $clienti, null,['placeholder' => 'Seleziona','autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('id_cliente') ? ' is-invalid' : null)]);
         @endphp
 
@@ -13,7 +13,7 @@
     {{-- Materiale --}}
     <div class="col-sm">
         @php
-            echo Form::label('id_materiale', 'Materiale', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::label('id_materiale', 'Materiale', ['class' => 'danger-text col-sm col-form-label col-form-label-sm']);
             echo Form::select('id_materiale', $materiali, null,['placeholder' => 'Seleziona','autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('id_materiale') ? ' is-invalid' : null)]);
         @endphp
 
@@ -22,7 +22,7 @@
     {{-- Categoria --}}
     <div class="col-sm">
         @php
-            echo Form::label('id_categoria', 'Categoria <b>*</b>', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::label('id_categoria', 'Categoria', ['class' => 'danger-text col-sm col-form-label col-form-label-sm']);
             echo Form::select('id_categoria', $categorie, null,['placeholder' => 'Seleziona','autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('id_categoria') ? ' is-invalid' : null)]);
         @endphp
 

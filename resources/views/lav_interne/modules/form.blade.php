@@ -8,7 +8,7 @@
 {{-- Macchinario --}}
 <div class="col-sm">
     @php
-        echo Form::label('id_macchinario', 'Macchinario', ['class' => 'col-sm col-form-label col-form-label-sm']);
+        echo Form::label('id_macchinario', 'Macchinario', ['class' => 'danger-text col-sm col-form-label col-form-label-sm']);
         echo Form::select('id_macchinario', $macchinari,null,['placeholder' => 'seleziona','autocomplete' => 'off','class' => 'form-control form-control-sm']);
     @endphp
 </div>
