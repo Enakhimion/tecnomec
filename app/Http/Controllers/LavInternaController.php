@@ -106,7 +106,6 @@ class LavInternaController extends Controller
         $validator = Validator::make(request()->all(),[
             'id_macchinario' => ['required','numeric','exists:macchinari,id'],
             'id_dominio_lav_interna' => ['required','numeric','exists:domini_lav_interne,id'],
-            'descrizione' => ['required','max:80'],
             'costo_utensileria' => ['required','numeric'],
             'costo_setup' => ['nullable','numeric'],
             'costo_orario_macchina' => ['nullable','numeric'],
