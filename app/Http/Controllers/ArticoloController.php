@@ -405,7 +405,7 @@ class ArticoloController extends Controller
         $data = [
             'articolo' => $articolo,
             'materiali' => Materiale::pluck('nome','id'),
-            'clienti' => Cliente::pluck('nome','id'),
+            'clienti' => Cliente::pluck('nome','id')->orderBy('nome'),
             'tipologie' => TipologiaLavEsterna::pluck('descrizione','id'),
             'macchinari' => Macchinario::pluck('nome','id'),
             'categorie' => Categoria::pluck('descrizione','id'),
