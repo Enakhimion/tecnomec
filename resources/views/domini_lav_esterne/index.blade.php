@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    @include('domini_lavorazioni_esterne.create')
+                    @include('domini_lav_esterne.create')
                     <table id="domini_lav_esterne" class="display">
                     </table>
                 </div>

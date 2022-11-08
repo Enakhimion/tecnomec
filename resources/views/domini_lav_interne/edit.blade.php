@@ -22,7 +22,7 @@
 
                 {!! Form::model($dominio_lav_interna, ['method' => 'PUT','route' => ['domini_lav_interne.update', $dominio_lav_interna]]) !!}
 
-                @include('dominio_lav_interna.modules.form')
+                @include('domini_lav_interne.modules.form')
 
             </div>
             <div class="modal-footer">
