@@ -19,7 +19,7 @@
 
     @foreach($domini_lav_interne as $dominio_lav_interna)
 
-        @include('materiali.edit')
+        @include('domini_lav_interne.edit')
 
     @endforeach
 
