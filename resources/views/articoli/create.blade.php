@@ -22,7 +22,7 @@
     <div class="content-wrapper p-5">
         <div class="card">
             <div class="card-header">
-                Articolo
+                Articolo - <b class="danger-text"> controllare i campi in rosso prima di procedere con l'inserimento </b>
             </div>
             <div class="card-body">
                 {!! Form::open(['url' => route('articoli.store')]) !!}
