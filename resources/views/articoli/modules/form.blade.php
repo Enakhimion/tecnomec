@@ -5,7 +5,7 @@
     <div class="col-sm">
         @php
             echo Form::label('id_cliente', 'Cliente', ['class' => 'danger-text col-sm col-form-label col-form-label-sm']);
-            echo Form::select('id_cliente', $clienti, null,['placeholder' => 'Seleziona','autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('id_cliente') ? ' is-invalid' : null)]);
+            echo Form::select('id_cliente', $clienti, null,['id' => 'cliente','placeholder' => 'Seleziona','autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('id_cliente') ? ' is-invalid' : null)]);
         @endphp
 
         @error('id_cliente')<div class="invalid-feedback">{{ $message  }}</div>@enderror
@@ -14,7 +14,7 @@
     <div class="col-sm">
         @php
             echo Form::label('id_materiale', 'Materiale', ['class' => 'danger-text col-sm col-form-label col-form-label-sm']);
-            echo Form::select('id_materiale', $materiali, null,['placeholder' => 'Seleziona','autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('id_materiale') ? ' is-invalid' : null)]);
+            echo Form::select('id_materiale', $materiali, null,['id' => 'materiale','placeholder' => 'Seleziona','autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('id_materiale') ? ' is-invalid' : null)]);
         @endphp
 
         @error('id_materiale')<div class="invalid-feedback">{{ $message  }}</div>@enderror
@@ -23,7 +23,7 @@
     <div class="col-sm">
         @php
             echo Form::label('id_categoria', 'Categoria', ['class' => 'danger-text col-sm col-form-label col-form-label-sm']);
-            echo Form::select('id_categoria', $categorie, null,['placeholder' => 'Seleziona','autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('id_categoria') ? ' is-invalid' : null)]);
+            echo Form::select('id_categoria', $categorie, null,['id' => 'categoria','placeholder' => 'Seleziona','autocomplete' => 'off','class' => 'form-control form-control-sm '. ($errors->has('id_categoria') ? ' is-invalid' : null)]);
         @endphp
 
         @error('id_categoria')<div class="invalid-feedback">{{ $message  }}</div>@enderror
@@ -165,4 +165,11 @@
     </div>
 </div>
 
+<script>
+$(document).ready(function() {
+    $('#cliente').select2();
+    $('#materiale').select2();
+    $('#categoria').select2();
+});
+</script>
 
