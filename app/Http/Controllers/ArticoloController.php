@@ -77,7 +77,9 @@ class ArticoloController extends Controller
             'lunghezza_barra' => ['nullable','numeric'],
             'lunghezza_spezzone' => ['nullable','numeric'],
             'recupero' => ['nullable','numeric'],
+            'prezzo_recupero' => ['nullable','numeric'],
             'is_contolavoro'  => ['nullable'],
+            'has_sfrido'  => ['nullable'],
         ]);
 
         //Validazione degli input
@@ -96,7 +98,9 @@ class ArticoloController extends Controller
             'lunghezza_barra' => $request->lunghezza_barra ?? 3000,
             'lunghezza_spezzone' => $request->lunghezza_spezzone ??150,
             'recupero' => $request->recupero ?? 0.1,
-            'is_contolavoro' => $request->is_contolavoro ? 1 : 0
+            'prezzo_recupero' => $request->prezzo_recupero ?? 0,
+            'is_contolavoro' => $request->is_contolavoro ? 1 : 0,
+            'has_sfrido' => $request->has_sfrido ? 1 : 0
         ]);
 
         //Creo anche il preventivo
@@ -209,6 +213,15 @@ class ArticoloController extends Controller
         $costo_mat_mm = $pesomm * $materiale->prezzo_kg;
         $costo_materiale = $articolo->is_contolavoro ? 0 : $costo_mat_mm * $articolo->lunghezza_tronchetto_totale - $recupero;
         $costo_materiale = $costo_materiale / 100 * $preventivo->ricarico_materiale + $costo_materiale;
+
+        //Calcolo il costo materiale con lo sfrido
+        if($articolo->has_sfrido){
+            $recupero_sfrido = $peso_tronchetto - $articolo->peso_articolo;
+            $prezzo_recupero = $articolo->prezzo_recupero;
+            $sfrido = $prezzo_recupero / 1000 * $recupero_sfrido;
+            $costo_materiale -= $sfrido;
+        }
+
 
         $costi = [];
 
@@ -432,7 +445,8 @@ class ArticoloController extends Controller
             'costo_materiale' => $costo_materiale,
             'elenco_interne'=> $elenco_interne,
             'elenco_esterne' => $elenco_esterne,
-            'elenco_altri_costi' => $elenco_altri_costi
+            'elenco_altri_costi' => $elenco_altri_costi,
+            'sfrido' => $sfrido,
         ];
 
         return view('articoli.edit', $data);
@@ -465,7 +479,9 @@ class ArticoloController extends Controller
             'lunghezza_barra' => ['nullable','numeric'],
             'lunghezza_spezzone' => ['nullable','numeric'],
             'recupero' => ['nullable','numeric'],
+            'prezzo_recupero' => ['nullable','numeric'],
             'is_contolavoro'  => [Rule::in(0,1)],
+            'has_sfrido'  => [Rule::in(0,1)],
         ]);
 
         //Validazione degli input
@@ -484,7 +500,9 @@ class ArticoloController extends Controller
             'lunghezza_barra' => $request->lunghezza_barra ?? 3000,
             'lunghezza_spezzone' => $request->lunghezza_spezzone ??150,
             'recupero' => $request->recupero ?? 0.1,
-            'is_contolavoro' => $request->is_contolavoro
+            'prezzo_recupero' => $request->prezzo_recupero ?? 0,
+            'is_contolavoro' => $request->is_contolavoro,
+            'has_sfrido' => $request->has_sfrido ? 1 : 0
         ]);
 
         return back()->with('success', 'Articolo inserito correttamente');

@@ -27,7 +27,9 @@ class Articolo extends Model
         'lunghezza_barra',
         'lunghezza_spezzone',
         'recupero',
-        'is_contolavoro'
+        'is_contolavoro',
+        'has_sfrido',
+        'prezzo_recupero'
     ];
 
     //Attributi al di fuori delle colonne del DB

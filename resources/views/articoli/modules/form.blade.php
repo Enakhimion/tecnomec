@@ -116,6 +116,35 @@
     </div>
 </div>
 
+<div class="form-group row mb-3 mt-3">
+    {{-- Recupero --}}
+    <div class="col-sm">
+        @php
+            echo Form::label('prezzo_recupero', 'Prezzo Recupero', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
+            echo Form::text('prezzo_recupero',null,['step' => '0.001','placeholder' => '0','class' => 'form-control form-control-sm '. ($errors->has('prezzo_recupero') ? ' is-invalid' : null)]);
+        @endphp
+
+        @error('prezzo_recupero')<div class="invalid-feedback">{{ $message }}</div>@enderror
+    </div>
+    {{-- Is conto lavoro --}}
+    <div class="col-sm">
+        @php
+            echo Form::label('has_sfrido', 'Applica recupero sfrido?', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
+            echo Form::select('has_sfrido',[0 => 'No', 1 => 'Si'],null,['class' => 'form-control form-control-sm '. ($errors->has('has_sfrido') ? ' is-invalid' : null)]);
+        @endphp
+
+        @error('has_sfrido')<div class="invalid-feedback">{{ $message }}</div>@enderror
+    </div>
+    <div class="col-sm">
+    </div>
+    <div class="col-sm">
+    </div>
+    <div class="col-sm">
+    </div>
+    <div class="col-sm">
+    </div>
+</div>
+
 {{-- Campi calcolati --}}
 
 <div class="form-group row mb-3 mt-3">
@@ -148,7 +177,12 @@
         @endphp
     </div>
 
+    {{-- Sfrido --}}
     <div class="col-sm">
+        @php
+            echo Form::label('sfrido', 'Sfrido', ['class' => 'col-sm col-form-label col-form-label-sm']);
+            echo Form::text('sfrido', ($sfrido ?? null),['disabled','autocomplete' => 'off','class' => 'form-control form-control-sm']);
+        @endphp
     </div>
     <div class="col-sm">
     </div>
