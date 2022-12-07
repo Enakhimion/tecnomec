@@ -120,7 +120,7 @@
     {{-- Recupero --}}
     <div class="col-sm">
         @php
-            echo Form::label('prezzo_recupero', 'Prezzo Recupero', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
+            echo Form::label('prezzo_recupero', 'Prezzo Recupero al KG', ['class' => 'default-text col-sm col-form-label col-form-label-sm']);
             echo Form::text('prezzo_recupero',null,['step' => '0.001','placeholder' => '0','class' => 'form-control form-control-sm '. ($errors->has('prezzo_recupero') ? ' is-invalid' : null)]);
         @endphp
 
