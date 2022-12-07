@@ -214,7 +214,10 @@ class ArticoloController extends Controller
         $costo_materiale = $articolo->is_contolavoro ? 0 : $costo_mat_mm * $articolo->lunghezza_tronchetto_totale - $recupero;
         $costo_materiale = $costo_materiale / 100 * $preventivo->ricarico_materiale + $costo_materiale;
 
+
         //Calcolo il costo materiale con lo sfrido
+        $sfrido = 0;
+
         if($articolo->has_sfrido){
             $recupero_sfrido = $peso_tronchetto - $articolo->peso_articolo;
             $prezzo_recupero = $articolo->prezzo_recupero;
