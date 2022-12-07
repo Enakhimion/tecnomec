@@ -103,16 +103,24 @@ class LavInternaController extends Controller
         /*--- Inizio validazione input --*/
 
         //Validazione dei campi presi in input
-        $validator = Validator::make(request()->all(),[
+        $controlli = [
             'id_macchinario' => ['required','numeric','exists:macchinari,id'],
-            'id_dominio_lav_interna' => ['required','numeric','exists:domini_lav_interne,id'],
             'costo_utensileria' => ['required','numeric'],
             'costo_setup' => ['nullable','numeric'],
             'costo_orario_macchina' => ['nullable','numeric'],
             'minuti_setup' => ['required','numeric'],
             'perc_resa' => ['nullable','numeric'],
             'tempo_pezzo' => ['required','numeric'],
-        ]);
+        ];
+
+        if($lav_interna->descrizione !== null){
+            $controlli['id_dominio_lav_interna'] = ['nullable','numeric','exists:domini_lav_interne,id'];
+        }else{
+            $controlli['id_dominio_lav_interna'] = ['required','numeric','exists:domini_lav_interne,id'];
+        }
+
+        //Validazione dei campi presi in input
+        $validator = Validator::make(request()->all(), $controlli);
 
         //Validazione degli input
         $validator->validate();

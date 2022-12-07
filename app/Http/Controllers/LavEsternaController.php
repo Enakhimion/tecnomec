@@ -93,11 +93,19 @@ class LavEsternaController extends Controller
         /*--- Inizio validazione input --*/
 
         //Validazione dei campi presi in input
-        $validator = Validator::make(request()->all(),[
-            'id_tipologia' => ['required','numeric','exists:tipologie_lav_esterne,id'],
-            'id_dominio_lav_esterna' => ['required','numeric','exists:domini_lav_esterne,id'],
+        $controlli = [
+            'id_tipologia' => ['required','numeric','exists:tipologie_lav_esterne,id'], 
             'importo' => ['required','numeric'],
-        ]);
+        ];
+
+        if($lav_esterna->descrizione !== null){
+            $controlli['id_dominio_lav_esterna'] = ['nullable','numeric','exists:domini_lav_esterne,id'];
+        }else{
+            $controlli['id_dominio_lav_esterna'] = ['required','numeric','exists:domini_lav_esterne,id'];
+        }
+
+
+        $validator = Validator::make(request()->all(), $controlli);
 
         //Validazione degli input
         $validator->validate();

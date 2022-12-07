@@ -12,6 +12,11 @@
                 Articolo - <b class="danger-text"> controllare i campi in rosso prima di procedere con l'inserimento </b>
             </div>
             <div class="card-body">
+
+                @if($errors->any())
+                    {!! implode('', $errors->all('<div>:message</div>')) !!}
+                @endif
+
                 {!! Form::model($articolo, ['method' => 'PUT','route' => ['articoli.update', $articolo]]) !!}
 
                 @include('articoli.modules.form')
